@@ -216,9 +216,6 @@ main a:hover{
     color: var(--branco);
     transition: background 0.2s ease-in-out, border-color 0.2s ease;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .interact button:hover{
