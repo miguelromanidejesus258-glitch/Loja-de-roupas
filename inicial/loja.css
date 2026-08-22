@@ -70,7 +70,7 @@ header ul li:hover{
     color: var(--dourado);
 }
 
-header button{
+header .config-header{
     padding: 10px;
     font-size: 20px;
     border: none;
@@ -84,8 +84,58 @@ header button{
     transition: transform 0.2s ease;
 }
 
-header button:hover{
+header .config-header:hover{
     transform: translateY(-3px);
+}
+
+.buttons-interact-header{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search {
+    display: flex;          /* Força o input e a lupa a ficarem na mesma linha */
+    align-items: center;    /* Alinha verticalmente o texto e a lupa no centro */
+    padding: 6px 14px;      /* Ajuste fino de espaçamento interno */
+    border-radius: 12px;
+    background: var(--preto);
+    border: 1px solid var(--dourado);
+}
+
+
+.search input{
+    background: transparent;
+    color: var(--branco);
+    outline: none;
+    flex: 1; /* Faz o input expandir */
+    padding-right: 10px;
+}
+
+.button-search{
+    background: transparent !important; /* Remove fundo padrão */
+    border: none !important;            /* Remove bordas indesejadas */
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-search ion-icon {
+    color: var(--dourado) !important;   /* Força a cor dourada no ícone */
+    font-size: 20px;                   /* Tamanho ideal para visualização */
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.button-search:hover ion-icon {
+    color: var(--branco) !important;
+    transform: scale(1.1);
+}
+
+::placeholder{
+    color: var(--branco-escuro);
 }
 
 /* |----- HERO -----| */
