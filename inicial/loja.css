@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Mea+Culpa&family=Monsieur+La+Doulaise&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: 0;
+}
+
+:root {
+  --preto: #0d0d0d;
+  --preto-mais-claro:#1d1d1d;
+  --paragrafo:#222222;
+  --preto-config:#1d1d1d;
+  --branco: #ffffff;
+  --branco-escuro:#7c7a7a;
+  --dourado: #c9a227;
+  --cinza-claro: #f2f2f2;
+  --cinza-escuro: #333333;
+  --preco: rgb(0, 175, 0);
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--preto);
+    color: var(--branco);
+    height: 100vh;
+}
+
+/* |----- HEADER -----| */
+
+header{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+header a{
+    text-decoration: none;
+    color: var(--branco);
+    transition: color 0.2s;
+}
+
+header a:hover{
+    color: var(--dourado);
+}
+
+h1{
+    font-family:"Mea Culpa", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header ul{
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+header ul li{
+    font-size: 15px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+header ul li:hover{
+    color: var(--dourado);
+}
+
+header button{
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    background: var(--preto-config);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--cinza-claro);
+    transition: transform 0.2s ease;
+}
+
+header button:hover{
+    transform: translateY(-3px);
+}
+
+/* |----- HERO -----| */
+
+#hero{
+    background-image:url(../assets/banner.enc);
+    background-position: center;
+    background-size: cover;
+    padding: 80px 20px;
+    text-align: center;
+    background-repeat: no-repeat;
+}
+
+.p1{
+    text-align: center;
+    margin: 0px 0px 8px 0px;
+    font-size: 15px;
+    color: var(--cinza-claro);
+}
+
+h2{
+    text-align: center;
+    font-size: 30px;
+}
+
+.p2{
+    text-align: center;
+    margin-top: 5px;
+    font-size: 15px;
+    color: var(--cinza-claro);
+}
+
+#hero button{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    padding: 15px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--preto-config);
+    border: none;
+    color: var(--cinza-claro);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+#hero button:hover{
+    transform: translateY(-3px);
+}
+
+/* |----- CARD -----| */
+
+#mais-vendidos{
+    padding: 60px 20px;
+}
+
+.grid-produtos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+main a{
+    text-decoration: none;
+    color: var(--branco);
+}
+
+main a:hover{
+    color:var(--branco-escuro);
+    text-decoration: underline;
+}
+
+#mais-vendidos .titulo-secao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.card{
+    display: flex;
+    border: 1px solid var(--preto-config);
+    border-radius: 12px;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.card img{
+    height: 200px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card .preco-card{
+    color: var(--preco);
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.informations-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.card{
+    transition: transform 0.2s ease;
+}
+
+.card:hover{
+    transform: translateY(-3px);
+}
+
+.interact button{
+    background: var(--preto-config);
+    padding: 8px;
+    border-radius: 12px;
+    color: var(--branco);
+    transition: background 0.2s ease-in-out, border-color 0.2s ease;
+    cursor: pointer;
+}
+
+.interact button:hover{
+    background: var(--preto);
+    border:1px solid var(--preto-config);
+}
