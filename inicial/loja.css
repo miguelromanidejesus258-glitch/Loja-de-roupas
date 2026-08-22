@@ -229,3 +229,21 @@ main a:hover{
     align-items: center;
     padding-bottom: 30px;
 }
+
+/* footer */
+
+footer{
+    border-top: 1px solid var(--preto-config);
+    padding: 5px;
+}
+
+.footer-informations{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--cinza-escuro);
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
