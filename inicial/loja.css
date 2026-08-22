@@ -142,7 +142,7 @@ h2{
 
 /* |----- CARD -----| */
 
-#mais-vendidos{
+#mais-vendidos, #masculino, #feminino, #infantil, #promocao{
     padding: 60px 20px;
 }
 
@@ -221,4 +221,11 @@ main a:hover{
 .interact button:hover{
     background: var(--preto);
     border:1px solid var(--preto-config);
+}
+
+.titulo-secao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
 }
