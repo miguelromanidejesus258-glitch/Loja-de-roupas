@@ -25,6 +25,8 @@ body{
     background: var(--preto);
     color: var(--branco);
     height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* |----- HEADER -----| */
@@ -35,6 +37,8 @@ header{
     align-items: center;
     justify-content: space-between;
     margin-bottom: 5px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 header a{
@@ -58,6 +62,8 @@ header ul{
     display: flex;
     gap: 32px;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 header ul li{
@@ -101,6 +107,7 @@ header .config-header:hover{
     border-radius: 12px;
     background: var(--preto);
     border: 1px solid var(--dourado);
+    max-width: 220px;
 }
 
 
@@ -110,6 +117,7 @@ header .config-header:hover{
     outline: none;
     flex: 1; /* Faz o input expandir */
     padding-right: 10px;
+    min-width: 0;
 }
 
 .button-search{
@@ -228,8 +236,9 @@ main a:hover{
 }
 
 .card img{
-    height: 200px;
-    width: 200px;
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
     padding: 10px;
     border-radius: 15px;
     margin-left: auto;
@@ -296,4 +305,25 @@ footer{
     color: var(--cinza-escuro);
     margin-bottom: 50px;
     margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    header ul {
+        justify-content: center;
+    }
+
+    .buttons-interact-header {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search {
+        max-width: 100%; /* Ocupa a largura disponível da tela no celular */
+    }
 }
