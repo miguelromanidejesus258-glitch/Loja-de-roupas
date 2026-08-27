@@ -266,6 +266,7 @@ main a:hover{
     gap: 5px;
     align-items: center;
     padding-top: 5px;
+    margin-bottom: 20px;
 }
 
 .card{
@@ -288,6 +289,28 @@ main a:hover{
 .interact button:hover{
     background: var(--preto);
     border:1px solid var(--preto-config);
+}
+
+.btn-compraragora{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--dourado);
+    border: 1px solid var(--dourado);
+    transition: background 0.2s ease, border 0.2s ease, transform 0.2s ease;
+}
+
+.btn-compraragora:hover{
+    background: #f0b906;
+    border: 1px solid var(--preto-config);
+    transform: translateY(-3px);
 }
 
 .titulo-secao{
