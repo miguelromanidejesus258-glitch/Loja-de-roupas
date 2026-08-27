@@ -149,7 +149,7 @@ header .config-header:hover{
 /* |----- HERO -----| */
 
 #hero{
-    background-image:url(../assets/banner.enc);
+    background-image:url(../assets/banner/banner.enc);
     background-position: center;
     background-size: cover;
     padding: 80px 20px;
