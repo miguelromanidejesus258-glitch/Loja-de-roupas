@@ -27,6 +27,20 @@ function showCartAdded(productName) {
 
 // adiciona listeners depois que o DOM carregar
 document.addEventListener('DOMContentLoaded', () => {
+  // popula atributos data-* em cada card usando o conteúdo já presente no HTML
+  function populateCardData(){
+    document.querySelectorAll('.card').forEach(card => {
+      const title = card.querySelector('h4, h3, .titulo-card');
+      const img = card.querySelector('img');
+      const price = card.querySelector('.preco-card');
+      if(title) card.dataset.name = title.textContent.trim();
+      if(img) card.dataset.image = img.src || '';
+      if(price) card.dataset.price = price.textContent.trim();
+      if(!card.dataset.link) card.dataset.link = 'descricao.html';
+    });
+  }
+
+  populateCardData();
     // delegação: seleciona todos os botões com class 'cart' dentro dos cards
     const cartButtons = document.querySelectorAll('.card .interact .cart, .card .interact button.cart');
     cartButtons.forEach(btn => {
@@ -42,4 +56,22 @@ document.addEventListener('DOMContentLoaded', () => {
             showCartAdded(productName);
         });
     });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-view-details').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const card = btn.closest('.card');
+      const d = card.dataset;
+      const product = {
+        name: d.name || card.querySelector('h4')?.textContent.trim() || 'Produto',
+        price: d.price || card.querySelector('.preco-card')?.textContent.trim() || '',
+        image: d.image || card.querySelector('img')?.src || '',
+        desc: d.desc || ''
+      };
+      sessionStorage.setItem('productDetails', JSON.stringify(product));
+      window.location.href = d.link || 'detalhes.html';
+    });
+  });
 });
