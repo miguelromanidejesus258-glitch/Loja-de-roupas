@@ -1,10 +1,45 @@
-function adicionarAoCarrinho(){
-    let carrinho = 0;
-    let produto = "Short Dry fit Nike Masculina";
-    while(carrinho < 10){
-        carrinho++
-        alert(`você adicionou ${carrinho} ${produto} no carrinho`);
-        break;
-    }
-    
+// Centraliza comportamento de adicionar ao carrinho e notificação (toast)
+function adicionarAoCarrinho() {
+    // função legacy — mantenho para compatibilidade se chamada diretamente
+    showCartAdded('Produto');
 }
+
+function showCartAdded(productName) {
+    if (!productName) productName = 'Produto';
+
+    // criar toast
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = `✅ ${productName} adicionado ao carrinho`;
+    document.body.appendChild(toast);
+
+    // força reflow para ativar transição
+    // eslint-disable-next-line no-unused-expressions
+    toast.offsetHeight;
+    toast.classList.add('show');
+
+    // remover após 3s
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+    }, 3000);
+}
+
+// adiciona listeners depois que o DOM carregar
+document.addEventListener('DOMContentLoaded', () => {
+    // delegação: seleciona todos os botões com class 'cart' dentro dos cards
+    const cartButtons = document.querySelectorAll('.card .interact .cart, .card .interact button.cart');
+    cartButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // tenta ler data-product do botão
+            const productFromData = btn.dataset && btn.dataset.product;
+            if (productFromData) return showCartAdded(productFromData);
+
+            // senão, procura o título do produto no card pai
+            const card = btn.closest('.card');
+            const titleEl = card ? card.querySelector('h4, h3, .titulo-card') : null;
+            const productName = titleEl ? titleEl.textContent.trim() : 'Produto';
+            showCartAdded(productName);
+        });
+    });
+});
