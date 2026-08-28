@@ -100,6 +100,36 @@ header .config-header:hover{
     gap: 15px;
 }
 
+.interact-header-cart-heart .cart{
+    padding: 10px;
+    background: var(--preto-mais-claro);
+    color: var(--branco);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size:18px;
+    transition: transform 0.2s ease;
+}
+
+.interact-header-cart-heart .heart{
+    padding: 10px;
+    background: var(--preto-mais-claro);
+    color: var(--branco);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size:18px;
+    transition: transform 0.2s ease;
+}
+
+.interact-header-cart-heart .heart:hover, .cart:hover{
+    transform: translateY(-3px);
+}
+
+.interact-header-cart-heart ion-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .search {
     display: flex;          /* Força o input e a lupa a ficarem na mesma linha */
     align-items: center;    /* Alinha verticalmente o texto e a lupa no centro */
