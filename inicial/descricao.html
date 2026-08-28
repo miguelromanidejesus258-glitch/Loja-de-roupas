@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes | RM Store</title>
+    <link rel="stylesheet" href="loja.css">
+    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+    <script src="loja.js"></script>
+</head>
+<body class="descricao">
+    <header>
+        <h1>RM Store</h1>
+        <div class="options">
+            <nav>
+                <ul>
+                    <li><a href="#masculino">Masculino</a></li>
+                    <li><a href="#feminino">Feminino</a></li>
+                    <li><a href="#infantil">Infantil</a></li>
+                    <li><a href="#promocao">Promoções</a></li>
+                    <li><a href="#conjunto">Conjuntos</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="buttons-interact-header">
+            
+            <div class="search">
+                <input type="search" id="searchDigitado" placeholder="Digite algum Produto.">
+                <button class="button-search">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+            </div>
+            <div class="interact-header-cart-heart">
+                <button class="cart">
+                    <ion-icon name="cart-outline"></ion-icon>
+                </button>
+                <button class="heart">
+                    <ion-icon name="heart-outline"></ion-icon>
+                </button>
+            </div>
+            <button class="config-header">
+                <ion-icon name="cog-outline"></ion-icon>
+            </button>
+        </div>
+        
+    </header>
+    <main>
+        <section class="details">
+            <div class="card-details">
+                <img src="../assets/masculino/conjuntos/dry fit/blue/download.jpg" alt="Foto do conjunto dry fit azul nike academy">
+
+            </div>
+            <div class="interact-details">
+                <h5>MAIS VENDIDO</h5>
+                <h2>Camisa Dry fit Academy Nike Masculina</h2>
+                <div class="buttons-details">
+                    <button>Compre agora</button>
+                    <button>Adicionar ao carrinho<ion-icon name="cart-outline"></ion-icon></button>
+                </div>
+                <div class="price-details">
+                    <h5>159,99R$</h5>
+                    <h2>119,99R$</h2>
+                </div>
+                <div class="interact-details">
+                    <div class="interact-color">
+                        <button class="blue-interact"></button>
+                        <label for="text">Azul</label>
+                    </div>
+                    <div class="tamanho-details">
+                        <button class="tamanho-interact">P</button>
+                        <label for="text">tamanho<br>P</label>
+                        <button class="tamanho-interact">M</button>
+                        <label for="text">tamanho<br>M</label>
+                        <button class="tamanho-interact">G</button>
+                        <label for="text">tamanho<br>G</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -202,6 +202,8 @@ header .config-header:hover{
     color: var(--branco-escuro);
 }
 
+/* |----- LOJA -----| */
+
 /* |----- HERO -----| */
 
 #hero{
@@ -220,7 +222,7 @@ header .config-header:hover{
     color: var(--cinza-claro);
 }
 
-h2{
+.loja h2{
     text-align: center;
     font-size: 30px;
 }
@@ -398,7 +400,10 @@ main a:hover{
     padding-bottom: 30px;
 }
 
-/* footer */
+
+/* |----- DESCRIÇÃO -----| */
+
+/* |----- FOOTER (GERAL) -----| */
 
 footer{
     border-top: 1px solid var(--preto-config);
