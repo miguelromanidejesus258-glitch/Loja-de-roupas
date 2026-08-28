@@ -359,6 +359,28 @@ main a:hover{
     transition: background 0.2s ease, border 0.2s ease, transform 0.2s ease;
 }
 
+.btn-compraragora a{
+    text-decoration: none;
+    color: var(--preto);
+}
+
+.btn-compraragora a:hover{
+    text-decoration: none;
+    color: var(--preto);
+}
+
+.btn-view-details a{
+    text-decoration: none;
+    color: var(--branco);
+}
+
+
+.btn-view-details a:hover{
+    text-decoration: none;
+    color: var(--branco);
+}
+
+
 .btn-compraragora:hover{
     background: #f0b906;
     border: 1px solid var(--preto-config);
