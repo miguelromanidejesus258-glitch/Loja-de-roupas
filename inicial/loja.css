@@ -7,6 +7,10 @@
     border: 0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 :root {
   --preto: #0d0d0d;
   --preto-mais-claro:#1d1d1d;
