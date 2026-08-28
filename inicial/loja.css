@@ -303,12 +303,19 @@ main a:hover{
 
 .card img{
     max-width: 100%;
-    height: auto;
+    height: 100%;
+    width: 100%;
     max-height: 200px;
     padding: 10px;
     border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.card .titulo-card{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--branco);
 }
 
 .card .preco-card{
