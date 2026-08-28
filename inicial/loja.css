@@ -94,6 +94,28 @@ header .config-header:hover{
     transform: translateY(-3px);
 }
 
+.interact-bottom{
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+}
+
+.btn-view-details{
+    width: 100%;
+    max-width: 100px;
+    border-radius:5px;
+    color: var(--branco);
+    background: transparent;
+    border: 1px solid var(--preto-config);
+    transition: transform 0.2s ease, border 0.2s ease;
+}
+
+.btn-view-details:hover{
+    transform: translateY(-3px);
+    border: 1px solid var(--branco-escuro);
+}
+
+
 .buttons-interact-header{
     display: flex;
     align-items: center;
