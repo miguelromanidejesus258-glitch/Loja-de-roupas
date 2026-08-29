@@ -146,10 +146,6 @@ header .config-header:hover{
     transition: transform 0.2s ease;
 }
 
-.interact-header-cart-heart .heart:hover, .cart:hover{
-    transform: translateY(-3px);
-}
-
 .interact-header-cart-heart ion-icon{
     display: flex;
     justify-content: center;
@@ -347,13 +343,14 @@ main a:hover{
     padding: 8px;
     border-radius: 12px;
     color: var(--branco);
+    border: 1px solid var(--preto-config);
     transition: background 0.2s ease-in-out, border-color 0.2s ease;
     cursor: pointer;
 }
 
 .interact button:hover{
     background: var(--preto);
-    border:1px solid var(--preto-config);
+    border-color:var(--preto-config);
 }
 
 .btn-compraragora{
