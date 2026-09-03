@@ -106,7 +106,7 @@ header .config-header:hover{
 
 .btn-view-details{
     width: 100%;
-    max-width: 100px;
+    max-width: 150px;
     border-radius:5px;
     color: var(--branco);
     background: transparent;
@@ -361,7 +361,7 @@ main a:hover{
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    max-width: 200px;
+    max-width: 150px;
     text-align: center;
     justify-content: center;
     align-items: center;
