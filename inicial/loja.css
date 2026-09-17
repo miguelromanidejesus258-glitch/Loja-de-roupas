@@ -266,7 +266,7 @@ header .interact-header-cart-heart .heart:hover, .cart:hover{
 
 /* |----- CARD -----| */
 
-#mais-vendidos, #masculino, #feminino, #infantil, #promocao, #conjunto{
+#mais-vendidos, #Camisas, #feminino, #infantil, #promocao, #conjunto{
     padding: 60px 20px;
 }
 
@@ -303,7 +303,9 @@ main a:hover{
 }
 
 .card img{
+    width: 200px;
     max-width: 100%;
+    height: 200px;
     max-height: 200px;
     padding: 10px;
     border-radius: 15px;
