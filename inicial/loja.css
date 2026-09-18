@@ -294,6 +294,12 @@ main a:hover{
     padding-bottom: 30px;
 }
 
+.titulo-secao h3{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .card{
     display: flex;
     border: 1px solid var(--preto-config);
