@@ -43,6 +43,11 @@ header{
     margin-bottom: 5px;
     flex-wrap: wrap;
     gap: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: var(--preto);
+    backdrop-filter: blur(10px);
 }
 
 header a{
