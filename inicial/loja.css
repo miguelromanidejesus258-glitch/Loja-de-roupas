@@ -427,19 +427,55 @@ main a:hover{
 /* |----- FOOTER (GERAL) -----| */
 
 footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 45px;
     border-top: 1px solid var(--preto-config);
-    padding: 5px;
 }
 
 .footer-informations{
+    color:var(--cinza-escuro);
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-social{
+    color: var(--cinza-escuro);
     display: flex;
     flex-direction: column;
+    text-align: center;
+}
+
+.footer-redes-sociais{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#instagram-footer, #tiktok-footer, #whatsapp-footer{
+    padding: 15px;
+    border: 1px solid var(--preto-config);
+    border-radius:50%;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: border 0.4s ease, transform 0.2s ease;
+}
+
+#instagram-footer, #tiktok-footer, #whatsapp-footer ion-icon{
+    display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    color: var(--cinza-escuro);
-    margin-bottom: 50px;
-    margin-top: 50px;
+}
+
+#instagram-footer:hover, #tiktok-footer:hover, #whatsapp-footer:hover{
+    border: 1px solid var(--branco);
+    transform: translateY(-3px);
 }
 
 @media (max-width: 768px) {
