@@ -433,6 +433,17 @@ footer{
     border-top: 1px solid var(--preto-config);
 }
 
+footer a{
+    text-decoration: none;
+    color: var(--branco);
+    border-radius: 50%;
+    transition:transform 0.2s ease;
+}
+
+footer a:hover{
+    transform: translateY(-3px);
+}
+
 .footer-informations{
     color:var(--cinza-escuro);
     display:flex;
