@@ -107,6 +107,7 @@ header .config-header:hover{
     display: flex;
     justify-content: space-between;
     gap:10px;
+    margin-top: 10px;
 }
 
 .btn-view-details{
@@ -117,6 +118,7 @@ header .config-header:hover{
     background: transparent;
     border: 1px solid var(--preto-config);
     transition: transform 0.2s ease, border 0.2s ease;
+    cursor: pointer;
 }
 
 .btn-view-details:hover{
@@ -381,6 +383,7 @@ main a:hover{
     align-items: center;
     padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
     background: var(--dourado);
     border: 1px solid var(--dourado);
     transition: background 0.2s ease, border 0.2s ease, transform 0.2s ease;
