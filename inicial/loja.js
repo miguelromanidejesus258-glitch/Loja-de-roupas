@@ -75,3 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// --- EFEITO ZOOM RMX - VERSÃO CORRIGIDA PRO SEU HTML ---
+document.querySelectorAll('.card img').forEach(img => {
+  img.addEventListener('mouseenter', () => {
+    img.style.transform = 'scale(1.6)';
+  });
+
+  img.addEventListener('mousemove', (e) => {
+    const rect = img.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    img.style.transformOrigin = `${x}% ${y}%`;
+  });
+
+  img.addEventListener('mouseleave', () => {
+    img.style.transformOrigin = 'center center';
+    img.style.transform = 'scale(1)';
+  });
+});
