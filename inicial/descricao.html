@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
     <title>Detalhes | RM Store</title>
     <link rel="stylesheet" href="loja.css">
     <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
@@ -11,23 +17,25 @@
 </head>
 <body class="descricao">
     <header>
-        <h1><a href="loja.html">RM Store</a></h1>
+        <h1><a href="loja.html">RMX Store</a></h1>
         <div class="options">
             <nav>
                 <ul>
-                    <li><a href="#masculino">Masculino</a></li>
-                    <li><a href="#feminino">Feminino</a></li>
-                    <li><a href="#infantil">Infantil</a></li>
-                    <li><a href="#promocao">Promoções</a></li>
+                    <li><a href="#Camisas">Camisas</a></li>
+                    <li><a href="#short">Shorts</a></li>
+                    <li><a href="#calca">Calças</a></li>
+                    <li><a href="#Blusa">Blusas</a></li>
                     <li><a href="#conjunto">Conjuntos</a></li>
+                    <li><a href="#promocao">Promoções</a></li>   
                 </ul>
             </nav>
         </div>
         <div class="buttons-interact-header">
-            
+
             <div class="search">
-                <input type="search" id="searchDigitado" placeholder="Digite algum Produto." required>
-                <button class="button-search">                    <ion-icon name="search-outline"></ion-icon>
+                <input type="search" id="searchDigitado" placeholder="Digite algum Produto.">
+                <button class="button-search">
+                    <ion-icon name="search-outline"></ion-icon>
                 </button>
             </div>
             <div class="interact-header-cart-heart">
@@ -42,39 +50,27 @@
                 <ion-icon name="cog-outline"></ion-icon>
             </button>
         </div>
+        
     </header>
     <main>
         <section class="details">
             <div class="card-details-img">
-                <img src="../assets/masculino/conjuntos/dry fit/blue/download.jpg" alt="Foto do conjunto dry fit azul nike academy">
-                <button><img src="../assets/masculino/conjuntos/dry fit/blue/Conjunto Academy 🥶.jpg" alt=""></button>
-                <button><img src="../assets/masculino/conjuntos/dry fit/blue/Conjunto Academy 🥶.jpg" alt=""></button>
-            </div>
+                <img id="imagem-principal" src="../assets/masculino/conjuntos/dry fit/blue/download.jpg" alt="">
+                <button><img id="mini-1" src="" alt=""></button>
+                <button><img id="mini-2" src="" alt=""></button>
+             </div>
             <div class="interact-details">
                 <h5>MAIS VENDIDO</h5>
-                <h2>Camisa Dry fit Academy Nike Masculina</h2>
-                <div class="buttons-details">
-                    <button>Compre agora</button>
-                    <button>Adicionar ao carrinho<ion-icon name="cart-outline"></ion-icon></button>
-                </div>
-                <div class="price-details">
-                    <h5>159,99R$</h5>
-                    <h2>119,99R$</h2>
-                </div>
-                <div class="interact-details">
-                    <div class="interact-color">
-                        <button class="blue-interact"></button>
-                        <label for="text">Azul</label>
-                    </div>
-                    <div class="tamanho-details">
-                        <button class="tamanho-interact">P</button>
-                        <label for="text">tamanho<br>P</label>
-                        <button class="tamanho-interact">M</button>
-                        <label for="text">tamanho<br>M</label>
-                        <button class="tamanho-interact">G</button>
-                        <label for="text">tamanho<br>G</label>
-                    </div>
-                </div>
+                <h2 id="nome-produto">Camisa Dry fit Academy Nike Masculina</h2>
+            <div class="buttons-details">
+                <button>Compre agora</button>
+                <button id="btn-add-carrinho-desc">Adicionar ao carrinho<ion-icon name="cart-outline"></ion-icon></button>
+            </div>
+            <div class="price-details">
+                <h5>159,99R$</h5>
+                <h2 id="preco-produto">119,99R$</h2>
+            </div>
+            <!-- resto igual -->
             </div>
         </section>
     </main>
@@ -84,6 +80,51 @@
             <p>Todos os direitos reservados</p>
             <p>₢ 2026</p>
         </div>
+        <div class="footer-social">
+            <p>Tem alguma duvida?<br>Fale conosco!</p>
+            <p>Nossos meios de comunicação:</p>
+            <div class="footer-redes-sociais">
+                <a href="http://instagram.com/rm_store_011/" target="_blank">
+                    <button id="instagram-footer">
+                        <ion-icon name="logo-instagram"></ion-icon>   
+                    </button>
+                </a>
+                <!--http://wa.me/5511951619314 - whatsapp-->
+                <a href="http://wa.me/5511951619314" target="_blank" rel="noopener noreferrer">
+                    <button id="whatsapp-footer">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                    </button>
+                </a>
+                <button id="tiktok-footer">
+                    <ion-icon name="logo-tiktok"></ion-icon>
+                </button>
+            </div>
+        </div>
     </footer>
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dados = sessionStorage.getItem('productDetails');
+  if(!dados) return;
+
+  const p = JSON.parse(dados);
+
+  // preenche com o que veio do card clicado
+  document.getElementById('imagem-principal').src = p.image;
+  document.getElementById('mini-1').src = p.image;
+  document.getElementById('mini-2').src = p.image;
+  document.getElementById('nome-produto').textContent = p.name;
+  document.getElementById('preco-produto').textContent = p.price;
+
+  // faz o botão de adicionar ao carrinho funcionar aqui também
+  document.getElementById('btn-add-carrinho-desc').addEventListener('click', () => {
+    // reaproveita sua função de toast
+    if(typeof showCartAdded === 'function') {
+      showCartAdded(p.name);
+    } else {
+      alert(p.name + ' adicionado!');
+    }
+  });
+});
+</script>z
 </html>

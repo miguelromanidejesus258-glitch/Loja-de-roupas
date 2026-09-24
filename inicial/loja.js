@@ -94,3 +94,25 @@ document.querySelectorAll('.card img').forEach(img => {
     img.style.transform = 'scale(1)';
   });
 });
+
+// --- VER MAIS -> DESCRICAO.HTML (versão pro seu HTML atual) ---
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-view-details').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); // impede o # do <a>
+      
+      const card = btn.closest('.card');
+      
+      const produto = {
+        name: card.dataset.name,
+        price: card.dataset.price,
+        image: card.dataset.image,
+        // pega a descrição se tiver, se não usa padrão
+        desc: card.dataset.desc || card.querySelector('h4').textContent
+      };
+      
+      sessionStorage.setItem('productDetails', JSON.stringify(produto));
+      window.location.href = card.dataset.link || 'descricao.html';
+    });
+  });
+});
