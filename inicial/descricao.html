@@ -60,11 +60,14 @@
         <section class="details">            
             <article class="photo">
                 <div class="card-details-img">
-                    <img id="imagem-principal" src="" alt="">
+                    <div class="main-zoom-wrapper">
+                        <img id="imagem-principal" src="" alt="">
+                    </div>
                     <div class="img-mini">
                         <button><img id="mini-1" src="" alt=""></button>
                         <button><img id="mini-2" src="" alt=""></button>
                     </div>
+                </div>
                     
                 </div>
             </article>
@@ -73,7 +76,7 @@
                     <h5><ion-icon name="flame-outline"></ion-icon>MAIS VENDIDO</h5>
                     <h2 id="nome-produto"></h2>
                     <div class="price-details">
-                        <h5>159,99R$</h5>
+                        <h5 id="preco-antigo">159,99R$</h5>
                         <h2 id="preco-produto">119,99R$</h2>
                     </div>
                     <div class="buttons-details">
@@ -136,6 +139,51 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       alert(p.name + ' adicionado!');
     }
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dados = sessionStorage.getItem('productDetails');
+  if(!dados) {
+    console.log('Nenhum produto clicado, mostra um padrão');
+    return;
+  }
+  const p = JSON.parse(dados);
+
+  // Preenche - IDs batem 100% com seu HTML novo
+  const imgPrincipal = document.getElementById('imagem-principal');
+  const mini1 = document.getElementById('mini-1');
+  const mini2 = document.getElementById('mini-2');
+  const nome = document.getElementById('nome-produto');
+  const preco = document.getElementById('preco-produto');
+
+  if(imgPrincipal) imgPrincipal.src = p.image;
+  if(mini1) mini1.src = p.image;
+  if(mini2) mini2.src = p.image;
+  if(nome) nome.textContent = p.name;
+  if(preco) preco.textContent = p.price;
+
+  // --- EFEITO ZOOM que segue o mouse (pra foto da sua print) ---
+  if(imgPrincipal) {
+    imgPrincipal.style.cursor = 'zoom-in';
+    imgPrincipal.addEventListener('mousemove', (e) => {
+      const rect = imgPrincipal.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      imgPrincipal.style.transformOrigin = `${x}% ${y}%`;
+      imgPrincipal.style.transform = 'scale(1.8)';
+    });
+    imgPrincipal.addEventListener('mouseleave', () => {
+      imgPrincipal.style.transform = 'scale(1)';
+    });
+  }
+
+  // miniaturas trocam a principal
+  document.querySelectorAll('.img-mini img').forEach(mini => {
+    mini.addEventListener('click', () => {
+      imgPrincipal.src = mini.src;
+    });
   });
 });
 </script>
