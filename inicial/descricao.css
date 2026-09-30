@@ -48,6 +48,7 @@ header{
     z-index: 9999;
     background: var(--preto);
     backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--preto-mais-claro);
 }
 
 header a{
@@ -213,18 +214,42 @@ header .interact-header-cart-heart .heart:hover, .cart:hover{
 
 main{
     display: flex;
-    padding-top: 50px;
+    padding: 50px;
 }
 
-.card-details-img #imagem-principal{
-    width: 800px;
+main section{
+    display: flex;
+    justify-content: space-between;
+}
+
+#imagem-principal{
+    width:400px;
     border-radius:10px;
-    border:1px solid var(--branco);
+    border:1px solid var(--preto-config);
+    cursor: zoom-in;
 }
 
+.photo .img-mini{
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
 .photo button img{
     display: flex;
-    width: 100px;
+    width: 65px;
+    border:1px solid var(--preto-mais-claro);
+    border-radius: 15px;
+}
+
+.photo button{
+    background: transparent;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: border 0.9s ease;
+}
+
+.photo button:hover{
+    border: 1px solid var(--branco);
 }
 footer{
     display: flex;
