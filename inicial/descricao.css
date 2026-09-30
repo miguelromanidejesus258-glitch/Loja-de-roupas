@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Mea+Culpa&family=Monsieur+La+Doulaise&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: 0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+:root {
+  --preto: #0d0d0d;
+  --preto-mais-claro:#1d1d1d;
+  --paragrafo:#222222;
+  --preto-config:#1d1d1d;
+  --branco: #ffffff;
+  --branco-escuro:#7c7a7a;
+  --dourado: #c9a227;
+  --cinza-claro: #f2f2f2;
+  --cinza-escuro: #333333;
+  --preco: rgb(0, 175, 0);
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--preto);
+    color: var(--branco);
+    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* |----- HEADER -----| */
+
+header{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: var(--preto);
+    backdrop-filter: blur(10px);
+}
+
+header a{
+    text-decoration: none;
+    color: var(--branco);
+    transition: color 0.2s;
+}
+
+header a:hover{
+    color: var(--dourado);
+}
+
+h1{
+    font-family:"Mea Culpa", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header ul{
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+header ul li{
+    font-size: 15px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+header ul li:hover{
+    color: var(--dourado);
+}
+
+header .config-header{
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    background: var(--preto-config);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--cinza-claro);
+    transition: transform 0.2s ease;
+}
+
+header .config-header:hover{
+    transform: translateY(-3px);
+}
+
+.interact-bottom{
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    margin-top: 10px;
+}
+
+.btn-view-details{
+    width: 100%;
+    max-width: 150px;
+    border-radius:5px;
+    color: var(--branco);
+    background: transparent;
+    border: 1px solid var(--preto-config);
+    transition: transform 0.2s ease, border 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-view-details:hover{
+    transform: translateY(-3px);
+    border: 1px solid var(--branco-escuro);
+}
+
+
+.buttons-interact-header{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.interact-header-cart-heart .cart{
+    padding: 10px;
+    background: var(--preto-mais-claro);
+    color: var(--branco);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size:18px;
+    transition: transform 0.2s ease;
+}
+
+.interact-header-cart-heart .heart{
+    padding: 10px;
+    background: var(--preto-mais-claro);
+    color: var(--branco);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size:18px;
+    transition: transform 0.2s ease;
+}
+
+header .interact-header-cart-heart .heart:hover, .cart:hover{
+    transform: translateY(-3px);
+}
+
+.interact-header-cart-heart ion-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    display: flex;          /* Força o input e a lupa a ficarem na mesma linha */
+    align-items: center;    /* Alinha verticalmente o texto e a lupa no centro */
+    padding: 6px 14px;      /* Ajuste fino de espaçamento interno */
+    border-radius: 12px;
+    background: var(--preto);
+    border: 1px solid var(--dourado);
+    max-width: 220px;
+}
+
+
+.search input{
+    background: transparent;
+    color: var(--branco);
+    outline: none;
+    flex: 1; /* Faz o input expandir */
+    padding-right: 10px;
+    min-width: 0;
+}
+
+.button-search{
+    background: transparent !important; /* Remove fundo padrão */
+    border: none !important;            /* Remove bordas indesejadas */
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-search ion-icon {
+    color: var(--dourado) !important;   /* Força a cor dourada no ícone */
+    font-size: 20px;                   /* Tamanho ideal para visualização */
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.button-search:hover ion-icon {
+    color: var(--branco) !important;
+    transform: scale(1.1);
+}
+
+::placeholder{
+    color: var(--branco-escuro);
+}
+
+/* |----- MAIN -----| */
+
+main{
+    display: flex;
+    padding-top: 50px;
+}
+
+.card-details-img #imagem-principal{
+    width: 800px;
+    border-radius:10px;
+    border:1px solid var(--branco);
+}
+
+.photo button img{
+    display: flex;
+    width: 100px;
+}
+footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 45px;
+    border-top: 1px solid var(--preto-config);
+}
+
+footer a{
+    text-decoration: none;
+    color: var(--branco);
+    border-radius: 50%;
+    transition:transform 0.2s ease;
+}
+
+footer a:hover{
+    transform: translateY(-3px);
+}
+
+.footer-informations{
+    color:var(--cinza-escuro);
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-social{
+    color: var(--cinza-escuro);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-redes-sociais{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#instagram-footer, #tiktok-footer, #whatsapp-footer{
+    padding: 15px;
+    border: 1px solid var(--preto-config);
+    border-radius:50%;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: border 0.4s ease, transform 0.2s ease;
+}
+
+#instagram-footer, #tiktok-footer, #whatsapp-footer ion-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#instagram-footer:hover, #tiktok-footer:hover, #whatsapp-footer:hover{
+    border: 1px solid var(--branco);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    header ul {
+        justify-content: center;
+    }
+
+    .buttons-interact-header {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search {
+        max-width: 100%; /* Ocupa a largura disponível da tela no celular */
+    }
+}
