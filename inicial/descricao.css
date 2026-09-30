@@ -440,3 +440,43 @@ footer a:hover{
         max-width: 100%; /* Ocupa a largura disponível da tela no celular */
     }
 }
+
+@media (max-width: 768px) {
+  .details {
+    flex-direction: column !important;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .card-details-img,
+  .main-zoom-wrapper,
+  .informations {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #imagem-principal {
+    width: 100% !important;
+  }
+
+  .interact-details {
+    width: 100%;
+  }
+
+  .price-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .buttons-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .buttons-details button {
+    width: 100%;
+    padding: 14px;
+  }
+}
