@@ -214,12 +214,19 @@ header .interact-header-cart-heart .heart:hover, .cart:hover{
 
 main{
     display: flex;
+    flex-direction: column;
+    gap: 40px;
     padding: 50px;
 }
 
 main section{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.details{
+    display: flex;
+    gap: 40px;
 }
 
 #imagem-principal{
@@ -254,7 +261,8 @@ main section{
 
 .informations{
     display: flex;
-    padding-left: 100px;
+    justify-content: center;
+    align-items: center;
 }
 
 .informations h5{
@@ -357,6 +365,182 @@ main section{
   object-fit: cover;
 }
 
+.description{
+    padding-top: 150px;
+}
+
+.description-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--preto-mais-claro);
+    padding: 25px;
+    border-radius: 12px;
+    border: transparent;
+    box-shadow: 2px 7px 2px rgba(0, 0, 0, 0.144);
+    width: 100%;
+}
+
+.description-text p, h2{
+    margin: 15px 0px;
+}
+
+.description-text p {
+    line-height: 1.6;        /* Aumenta a altura entre as linhas de texto */
+    letter-spacing: 0.5px;   /* Adiciona espaço entre cada letra */
+    word-spacing: 2px;       /* Adiciona espaço extra entre as palavras */
+    margin-top: 15px;        /* Afasta o parágrafo da linha ou do título */
+    color: var(--cinza-claro);
+}
+
+.description-text hr {
+    border: none;
+    border-top: 1px solid var(--cinza-escuro); /* Escolha a cor da linha */
+    margin: 15px 0; /* Espaçamento em cima e embaixo da linha */
+}
+
+.vermais{
+    margin-top: 100px;
+}
+
+.grid-produtos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+#mais-vendidos .titulo-secao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.titulo-secao h3{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card{
+    display: flex;
+    border: 1px solid var(--preto-config);
+    border-radius: 12px;
+    flex-direction: column;
+    padding: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    margin: 0px 40px;
+}
+
+.card img{
+    width: 200px;
+    display: block;
+    max-width: 100%;
+    height: 200px;
+    max-height: 200px;
+    padding: 10px;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card .titulo-card{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--branco);
+}
+
+.card .preco-card{
+    color: var(--price);
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.informations-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    padding-top: 5px;
+    margin-bottom: 20px;
+}
+
+.card{
+    transition: transform 0.2s ease;
+}
+
+.card:hover{
+    transform: translateY(-3px);
+}
+
+.interact button{
+    background: var(--preto-config);
+    padding: 8px;
+    border-radius: 12px;
+    color: var(--branco);
+    border: 1px solid var(--preto-config);
+    transition: background 0.2s ease-in-out, border-color 0.2s ease;
+    cursor: pointer;
+}
+
+.interact button:hover{
+    background: var(--preto);
+    border-color:var(--preto-config);
+    transform:translateY(0px);
+}
+
+.btn-compraragora{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 150px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: var(--dourado);
+    border: 1px solid var(--dourado);
+    transition: background 0.2s ease, border 0.2s ease, transform 0.2s ease;
+}
+
+.btn-compraragora a{
+    text-decoration: none;
+    color: var(--preto);
+}
+
+.btn-compraragora a:hover{
+    text-decoration: none;
+    color: var(--preto);
+}
+
+.btn-view-details a{
+    text-decoration: none;
+    color: var(--branco);
+}
+
+
+.btn-view-details a:hover{
+    text-decoration: none;
+    color: var(--branco);
+}
+
+
+.btn-compraragora:hover{
+    background: #f0b906;
+    border: 1px solid var(--preto-config);
+    transform: translateY(-3px);
+}
+
+.titulo-secao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
 footer{
     display: flex;
     justify-content: space-between;
