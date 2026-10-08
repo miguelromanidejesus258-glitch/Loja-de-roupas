@@ -280,6 +280,10 @@ main section{
     padding-top: 50px;
 }
 
+#preco-antigo{
+    text-decoration: line-through;
+}
+
 .price-details h2{
     color: var(--price);
 }
