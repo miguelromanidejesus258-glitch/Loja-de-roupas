@@ -816,3 +816,18 @@ footer a:hover{
     flex: 1 !important;
   }
 }
+
+@media (max-width: 768px) {
+  .cards {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 15px !important;
+    padding-bottom: 10px !important;
+    scroll-snap-type: x mandatory;
+  }
+  .card {
+    min-width: 75% !important;
+    scroll-snap-align: start;
+  }
+}
