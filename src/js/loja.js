@@ -1,118 +1,56 @@
-// Centraliza comportamento de adicionar ao carrinho e notificação (toast)
-function adicionarAoCarrinho() {
-    // função legacy — mantenho para compatibilidade se chamada diretamente
-    showCartAdded('Produto');
+// LOJA.JS FINAL - RMX STORE
+function showCartAdded(name) {
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification show';
+  toast.textContent = `✅ ${name || 'Produto'} adicionado`;
+  document.body.appendChild(toast);
+  setTimeout(() => { toast.remove(); }, 3000);
 }
 
-function showCartAdded(productName) {
-    if (!productName) productName = 'Produto';
-
-    // criar toast
-    const toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    toast.textContent = `✅ ${productName} adicionado ao carrinho`;
-    document.body.appendChild(toast);
-
-    // força reflow para ativar transição
-    // eslint-disable-next-line no-unused-expressions
-    toast.offsetHeight;
-    toast.classList.add('show');
-
-    // remover após 3s
-    setTimeout(() => {
-        toast.classList.remove('show');
-        toast.addEventListener('transitionend', () => toast.remove(), { once: true });
-    }, 3000);
-}
-
-// adiciona listeners depois que o DOM carregar
 document.addEventListener('DOMContentLoaded', () => {
-  // popula atributos data-* em cada card usando o conteúdo já presente no HTML
-  function populateCardData(){
-    document.querySelectorAll('.card').forEach(card => {
-      const title = card.querySelector('h4, h3, .titulo-card');
-      const img = card.querySelector('img');
-      const price = card.querySelector('.preco-card');
-      if(title) card.dataset.name = title.textContent.trim();
-      if(img) card.dataset.image = img.src || '';
-      if(price) card.dataset.price = price.textContent.trim();
-      if(!card.dataset.link) card.dataset.link = 'descricao.html';
+  // 1. Preenche data-* automático
+  document.querySelectorAll('.card').forEach(card => {
+    const h4 = card.querySelector('h4');
+    const img = card.querySelector('img');
+    const preco = card.querySelector('.preco-card');
+    if(h4) card.dataset.name = card.dataset.name || h4.innerText.trim();
+    if(img) card.dataset.image = card.dataset.image || img.src;
+    if(preco) card.dataset.price = card.dataset.price || preco.innerText.trim();
+    if(!card.dataset.link) card.dataset.link = 'descricao.html';
+  });
+
+  // 2. Botão carrinho
+  document.querySelectorAll('.card .cart').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.card');
+      showCartAdded(card.dataset.name);
     });
-  }
+  });
 
-  populateCardData();
-    // delegação: seleciona todos os botões com class 'cart' dentro dos cards
-    const cartButtons = document.querySelectorAll('.card .interact .cart, .card .interact button.cart');
-    cartButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // tenta ler data-product do botão
-            const productFromData = btn.dataset && btn.dataset.product;
-            if (productFromData) return showCartAdded(productFromData);
-
-            // senão, procura o título do produto no card pai
-            const card = btn.closest('.card');
-            const titleEl = card ? card.querySelector('h4, h3, .titulo-card') : null;
-            const productName = titleEl ? titleEl.textContent.trim() : 'Produto';
-            showCartAdded(productName);
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
+  // 3. Ver mais - UMA vez só
   document.querySelectorAll('.btn-view-details').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault();
       const card = btn.closest('.card');
-      const d = card.dataset;
-      const product = {
-        name: d.name || card.querySelector('h4')?.textContent.trim() || 'Produto',
-        price: d.price || card.querySelector('.preco-card')?.textContent.trim() || '',
-        image: d.image || card.querySelector('img')?.src || '',
-        desc: d.desc || ''
-      };
-      sessionStorage.setItem('productDetails', JSON.stringify(product));
-      window.location.href = d.link || 'detalhes.html';
-    });
-  });
-});
-
-// --- EFEITO ZOOM RMX - VERSÃO CORRIGIDA PRO SEU HTML ---
-document.querySelectorAll('.card img').forEach(img => {
-  img.addEventListener('mouseenter', () => {
-    img.style.transform = 'scale(1.6)';
-  });
-
-  img.addEventListener('mousemove', (e) => {
-    const rect = img.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    img.style.transformOrigin = `${x}% ${y}%`;
-  });
-
-  img.addEventListener('mouseleave', () => {
-    img.style.transformOrigin = 'center center';
-    img.style.transform = 'scale(1)';
-  });
-});
-
-// --- VER MAIS -> DESCRICAO.HTML (versão pro seu HTML atual) ---
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.btn-view-details').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault(); // impede o # do <a>
-      
-      const card = btn.closest('.card');
-      
       const produto = {
         name: card.dataset.name,
         price: card.dataset.price,
         image: card.dataset.image,
-        // pega a descrição se tiver, se não usa padrão
-        desc: card.dataset.desc || card.querySelector('h4').textContent
+        desc: card.dataset.desc || card.dataset.name
       };
-      
       sessionStorage.setItem('productDetails', JSON.stringify(produto));
-      window.location.href = card.dataset.link || 'descricao.html';
+      window.location.href = 'descricao.html';
     });
   });
 });
+
+function prt(){
+  const input = document.getElementById('perguntaDigitada');
+  if(!input.value) return;
+  const div = document.createElement('p');
+  div.textContent = "Você: " + input.value;
+  div.style = "margin-top:10px; color:#f2f2f2; background:#1d1d1d; padding:10px; border-radius:8px;";
+  document.querySelector('.pergunta').appendChild(div);
+  input.value = "";
+  showCartAdded("Pergunta enviada");
+}

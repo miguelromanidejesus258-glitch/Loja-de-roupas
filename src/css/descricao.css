@@ -735,6 +735,20 @@ footer a:hover{
     flex-direction: column;
 }
 
+.box-prt input::placeholder{
+    color:var(--branco);
+}
+
+.box-prt input{
+    color:var(--branco);
+    outline: none;
+}
+
+.pergunta a {
+    color: var(--dourado); 
+    font-size: 14px; 
+}
+
 .avaliacao h2{
     margin-bottom: 30px;
 }
@@ -742,4 +756,34 @@ footer a:hover{
 .star-avalition{
     display: flex;
     gap: 10px;
+}
+
+.sizes {
+    margin: 20px 0;
+}
+.sizes p {
+    color: var(--branco-escuro); 
+    margin-bottom: 8px; 
+    font-size: 14px; 
+}
+
+.size-options { 
+    display: flex; 
+    gap: 10px; 
+}
+
+.size-options button {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--preto-mais-claro);
+    color: var(--branco);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.size-options button:hover, .size-options button.active {
+    border-color: var(--dourado);
+    background: var(--dourado);
+    color: var(--preto);
 }
