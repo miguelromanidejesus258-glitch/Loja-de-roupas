@@ -787,3 +787,32 @@ footer a:hover{
     background: var(--dourado);
     color: var(--preto);
 }
+
+@media (max-width: 768px) {
+  .cards, .recomendados, .lista-produtos {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    padding: 0 15px !important;
+  }
+
+  .card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .card img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+  }
+
+  .card .botoes, .card .actions {
+    display: flex !important;
+    gap: 10px !important;
+  }
+  .card .botoes button, .card .actions button {
+    flex: 1 !important;
+  }
+}
