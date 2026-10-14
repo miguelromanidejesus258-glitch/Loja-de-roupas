@@ -1,0 +1,36 @@
+
+COMO ACHAR E EDITAR SUA LOJA
+
+
+1. ONDE ESTÁ O ARQUIVO DA LOJA?
+-> Abra a pasta "public"
+-> Lá dentro está o arquivo "loja.html"
+-> ESSE é o arquivo principal. É só ele que você vai editar.
+
+2. O QUE SÃO "LINKAGENS EXTERNAS"?
+São os links que estão no loja.html tipo:
+- link do checkout
+- link do instagram
+- link das fotos
+
+Se você mudar a pasta de lugar, o site quebra porque ele não acha mais as fotos.
+
+3. COMO MUDAR SEM QUEBRAR?
+
+NUNCA mude a pasta "assets" de lugar. Deixa ela do lado do loja.html.
+
+Só mude isso dentro do loja.html:
+
+Procure por (CTRL + F):
+- href=" -> são os links
+- src=" -> são as fotos
+
+Exemplo:
+src="assets/foto1.jpg"  -> troca só o nome da foto
+href="https://instagram.com" -> coloca seu insta
+
+4. DICA DE OURO:
+Não mexe em nada que começa com /src ou /config
+Só mexe no loja.html
+
+Qualquer coisa me chama no WhatsApp!

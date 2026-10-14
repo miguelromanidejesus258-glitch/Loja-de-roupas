@@ -1,0 +1,20 @@
+[
+  {
+    "id": 0,
+    "name": "Camisa Dry fit Nike Masculina Preta",
+    "price": "90,99R$",
+    "image": "../assets/masculino/camisas/camisa rmx store.png",
+    "link": "descricao.html",
+    "description": "Camisa dry fit de alta qualidade, ideal para treino.",
+    "categoria": "mais-vendidos"
+  },
+  {
+    "id": 1,
+    "name": "Short RMX Store Masculino Preta",
+    "price": "45,90R$",
+    "image": "../assets/masculino/short/short rmx store - preta.png",
+    "link": "descricao.html",
+    "description": "Short confortável para dia a dia.",
+    "categoria": "mais-vendidos"
+  }
+]

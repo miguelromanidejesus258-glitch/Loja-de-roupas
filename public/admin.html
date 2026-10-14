@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ADM - RMX Store</title>
+<link rel="stylesheet" href="../src/css/admin.css">
+</head>
+<body>
+
+<h1>PAINEL ADM - RMX STORE</h1>
+
+<div class="form-add">
+    <h3>Adicionar / Editar Produto</h3>
+    <input id="edit-id" type="hidden">
+    <input id="f-name" placeholder="Nome">
+    <input id="f-price" placeholder="Preço ex: 90,99R$">
+    <input id="f-image" placeholder="Caminho da imagem">
+    <input id="f-link" placeholder="Link de venda">
+    <textarea id="f-desc" placeholder="Descrição"></textarea>
+    <button class="btn-add" onclick="salvarProduto()">Salvar Produto</button>
+    <button onclick="limparForm()">Cancelar</button>
+    <button onclick="exportarJSON()" style="background:yellow; color:black">⬇️ Baixar produtos.json</button>
+</div>
+
+<div class="grid" id="lista"></div>
+
+<script>
+let produtos = [];
+fetch('../config/produtos.json')
+.then(r=>r.json())
+.then(data=>{ produtos=data; render(); })
+.catch(()=>{ produtos=[]; render(); });
+
+function render(){
+ const lista=document.getElementById('lista');
+ lista.innerHTML='';
+ produtos.forEach((p,i)=>{
+  lista.innerHTML+=`
+  <div class="card-admin">
+   <img src="${p.image}">
+   <h4>${p.name}</h4>
+   <p>${p.price}</p>
+   <p style="font-size:12px; opacity:0.7">${p.description?.substring(0,80)}</p>
+   <button class="btn-save" onclick="editar(${i})">Editar</button>
+   <button class="btn-del" onclick="remover(${i})">Apagar</button>
+  </div>`;
+ });
+}
+
+function editar(i){
+ const p=produtos[i];
+ document.getElementById('edit-id').value=i;
+ document.getElementById('f-name').value=p.name;
+ document.getElementById('f-price').value=p.price;
+ document.getElementById('f-image').value=p.image;
+ document.getElementById('f-link').value=p.link;
+ document.getElementById('f-desc').value=p.description;
+ window.scrollTo(0,0);
+}
+
+function salvarProduto(){
+ const id=document.getElementById('edit-id').value;
+ const novo={
+  id: id? produtos[id].id : Date.now(),
+  name: document.getElementById('f-name').value,
+  price: document.getElementById('f-price').value,
+  image: document.getElementById('f-image').value,
+  link: document.getElementById('f-link').value,
+  description: document.getElementById('f-desc').value,
+  categoria: "mais-vendidos"
+ };
+ if(id!=="") produtos[id]=novo;
+ else produtos.push(novo);
+ render();
+ limparForm();
+ alert("Salvo! Baixa o JSON e substitui na pasta config");
+}
+
+function remover(i){
+ if(confirm("Apagar?")){
+  produtos.splice(i,1);
+  render();
+ }
+}
+
+function limparForm(){
+ document.getElementById('edit-id').value="";
+ document.getElementById('f-name').value="";
+ document.getElementById('f-price').value="";
+ document.getElementById('f-image').value="";
+ document.getElementById('f-link').value="";
+ document.getElementById('f-desc').value="";
+}
+
+function exportarJSON(){
+ const blob=new Blob([JSON.stringify(produtos, null, 2)], {type:'application/json'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='produtos.json';
+ a.click();
+}
+</script>
+
+</body>
+</html>

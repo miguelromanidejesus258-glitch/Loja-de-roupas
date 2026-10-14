@@ -1,265 +1,245 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../ico/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo/favicon-16x16.png">
-    <link rel="manifest" href="../vscode/site.webmanifest">
-    <link rel="shortcut icon" href="favicon.ico">
-    <title>Detalhes | RMX Store</title>
-    <link rel="stylesheet" href="../src/css/descricao.css">
-    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
-    <script src="../src/js/loja.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../ico/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="../assets/logo/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="../assets/logo/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="../assets/logo/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="../vscode/site.webmanifest" rel="manifest"/>
+<link href="favicon.ico" rel="shortcut icon"/>
+<title>Detalhes | RMX Store</title>
+<link href="../src/css/descricao.css" rel="stylesheet"/>
+<script src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js" type="module"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+<script src="../src/js/loja.js"></script>
 </head>
 <body class="descricao">
-    <header>
-        <h1>
-            <a href="loja.html">
+<header>
+<h1>
+<a href="loja.html">
                 RMX Store
             </a>
-        </h1>
-        <div class="options">
-            <nav>
-                <ul>
-                    <li><a href="#Camisas">Camisas</a></li>
-                    <li><a href="#short">Shorts</a></li>
-                    <li><a href="#calca">Calças</a></li>
-                    <li><a href="#Blusa">Blusas</a></li>
-                    <li><a href="#conjunto">Conjuntos</a></li>
-                    <li><a href="#promocao">Promoções</a></li>   
-                </ul>
-            </nav>
-        </div>
-        <div class="buttons-interact-header">
+</h1>
+<div class="options">
+<nav>
+<ul>
+<li><a href="#Camisas">Camisas</a></li>
+<li><a href="#short">Shorts</a></li>
+<li><a href="#calca">Calças</a></li>
+<li><a href="#Blusa">Blusas</a></li>
+<li><a href="#conjunto">Conjuntos</a></li>
+<li><a href="#promocao">Promoções</a></li>
+</ul>
+</nav>
+</div>
+<div class="buttons-interact-header">
+<div class="search">
+<input id="searchDigitado" placeholder="Digite algum Produto." type="search"/>
+<button class="button-search">
+<ion-icon name="search-outline"></ion-icon>
+</button>
+</div>
+<div class="interact-header-cart-heart">
+<button class="cart">
+<ion-icon name="cart-outline"></ion-icon>
+</button>
+<button class="heart">
+<ion-icon name="heart-outline"></ion-icon>
+</button>
+</div>
+<button class="config-header">
+<ion-icon name="cog-outline"></ion-icon>
+</button>
+</div>
+</header>
+<main>
+<section class="details">
+<article class="photo">
+<div class="card-details-img">
+<div class="main-zoom-wrapper">
+<img alt="" id="imagem-principal" src=""/>
+</div>
+<div class="img-mini">
+<button><img alt="" id="mini-1" src=""/></button>
+<button><img alt="" id="mini-2" src=""/></button>
+</div>
+</div>
 
-            <div class="search">
-                <input type="search" id="searchDigitado" placeholder="Digite algum Produto.">
-                <button class="button-search">
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
-            </div>
-            <div class="interact-header-cart-heart">
-                <button class="cart">
-                    <ion-icon name="cart-outline"></ion-icon>
-                </button>
-                <button class="heart">
-                    <ion-icon name="heart-outline"></ion-icon>
-                </button>
-            </div>
-            <button class="config-header">
-                <ion-icon name="cog-outline"></ion-icon>
-            </button>
-        </div>
-        
-    </header>
-    <main>
-        <section class="details">            
-            <article class="photo">
-                <div class="card-details-img">
-                    <div class="main-zoom-wrapper">
-                        <img id="imagem-principal" src="" alt="">
-                    </div>
-                    <div class="img-mini">
-                        <button><img id="mini-1" src="" alt=""></button>
-                        <button><img id="mini-2" src="" alt=""></button>
-                    </div>
-                </div>
+</article>
+<article class="informations">
+<div class="interact-details">
+<h5><ion-icon name="flame-outline"></ion-icon>MAIS VENDIDO</h5>
+<h2 id="nome-produto"></h2>
+<div class="price-details">
+<h5 id="preco-antigo">159,99R$</h5>
+<h2 id="preco-produto">119,99R$</h2>
+</div>
+<div class="sizes">
+<p>Tamanho: </p>
+<div class="size-options">
+<button>P</button>
+<button>M</button>
+<button>G</button>
+<button>GG</button>
+</div>
+</div>
+<div class="buttons-details">
+<button class="btn-compre-agora">Compre agora</button>
+<button id="btn-add-carrinho-desc">Adicionar ao carrinho<ion-icon name="cart-outline"></ion-icon></button>
+</div>
+</div>
+<!-- resto igual -->
 
-                </div>
-            </article>
-            <article class="informations">
-                <div class="interact-details">
-                    <h5><ion-icon name="flame-outline"></ion-icon>MAIS VENDIDO</h5>
-                    <h2 id="nome-produto"></h2>
-                    <div class="price-details">
-                        <h5 id="preco-antigo">159,99R$</h5>
-                        <h2 id="preco-produto">119,99R$</h2>
-                    </div>
-                    <div class="sizes">
-                        <p>Tamanho: </p>
-                        <div class="size-options">
-                            <button>P</button>
-                            <button>M</button>
-                            <button>G</button>
-                            <button>GG</button>
-                        </div>
-
-                    </div>
-                    <div class="buttons-details">
-                        <button class="btn-compre-agora">Compre agora</button>
-                        <button id="btn-add-carrinho-desc">Adicionar ao carrinho<ion-icon name="cart-outline"></ion-icon></button>
-                    </div>
-                </div>
-                <!-- resto igual -->
-                </div>
-            </article>            
-        </section>
-        <section class="description">
-            <article class="description-text">
-                <h2>Descrição do Produto</h2>
-                <hr>
-                <p id="descricao-produto">A descrição do produto vai estar aqui!</p>
-            </article>
-        </section>
-        <div class="vermais">
-            <h2>Você também pode gostar dê:</h2>  
-        </div>
-        <section class="ver-mais-relacionados">
-            
-            <section id="Camisas">
-                <article class="card">
-                    <img src="../assets/masculino/camisas/camisa rmx store branca.png" alt="Foto de uma Camisa da rmx store branca">
-                    <h4>Camisa RMX Store Masculina Branca</h4>
-                
-                    <div class="informations-card">
-                        <p class="preco-card">69,99R$</p>
-                        <div class="interact">
-                            
-                            <button class="cart">
-                                <ion-icon name="cart-outline"></ion-icon>
-                            </button>
-                            <button class="heart">
-                                <ion-icon name="heart-outline"></ion-icon>
-                            </button>
-                        </div>
-                    
-                    
-                    </div>
-                    <div class="interact-bottom">
-                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
-                       <button class="btn-view-details">Ver mais</button>
-                    </div>
-                </article>
-                <article class="card">
-                    <img src="../assets/masculino/camisas/camisa rmx store Preta (logo no meio).png" alt="Foto de uma camisa">
-                    <h4>Camisa RMX Store masculina Preta</h4>
-                
-                    <div class="informations-card">
-
-                        <p class="preco-card">69,99R$</p>
-
-                        <div class="interact">
-                            
-                            <button class="cart">
-                                <ion-icon name="cart-outline"></ion-icon>
-                            </button>
-                            <button class="heart">
-                                <ion-icon name="heart-outline"></ion-icon>
-                            </button>
-                        </div>
-                   
-                    
-                    </div>
-                    <div class="interact-bottom">
-                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
-                       <button class="btn-view-details">Ver mais</button>
-                    </div>
-                </article>
-                <article class="card">
-                    <img src="../assets/masculino/camisas/camisa rmx store vermelha.png" alt="Foto de uma Calça">
-                    <h4>Calça RMX Store Masculina Vermelha</h4>
-                
-                    <div class="informations-card">
-                        <p class="preco-card">69,99R$</p>
-                        <div class="interact">
-                            
-                            <button class="cart">
-                                <ion-icon name="cart-outline"></ion-icon>
-                            </button>
-                            <button class="heart">
-                                <ion-icon name="heart-outline"></ion-icon>
-                            </button>
-                    
-                        </div>
-                   
-                    </div>
-                    <div class="interact-bottom">
-                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
-                       <button class="btn-view-details">Ver mais</button>
-                    </div>
-                </article>
-            </section>
-        </section>
-        <section class="pergunta">
-            <h2>Perguntas</h2>
-            <div class="box-prt">
-                <input type="text" id="perguntaDigitada" placeholder="Digite sua pergunta...">
-                <button onclick="prt()" class="btn-prt">Perguntar</button>
-            </div>
-            <a href="descricao.html">Ver todas as perguntas</a>
-        </section>
-        <section class="avaliacao">
-            <h2>Avaliações do Produto</h2>
-            <div class="star-avalition">
-                <ion-icon name='star'></ion-icon>
-                <ion-icon name='star'></ion-icon>
-                <ion-icon name='star'></ion-icon>
-                <ion-icon name='star'></ion-icon>
-                <ion-icon name='star-half-outline'></ion-icon>
-                <p>(14)</p>
-            </div>
-            <!-- FILTROS -->
-            <div class="avaliacao-filtros">
-                <button class="ativo">Todas (14)</button>
-                <button>Com fotos (8)</button>
-                <button>Com vídeos (3)</button>
-                <button>5 estrelas (10)</button>
-            </div>
-
-            <!-- GALERIA DE FOTOS/VIDEOS DOS CLIENTES -->
-            <div class="avaliacao-midias">
-                <div class="midia-thumb"><img src="https://via.placeholder.com/80" alt="foto cliente"><span>▶</span></div>
-                <div class="midia-thumb"><img src="https://via.placeholder.com/80" alt="foto cliente"></div>
-                <div class="midia-thumb"><img src="https://via.placeholder.com/80" alt="foto cliente"></div>
-                <div class="midia-thumb"><img src="https://via.placeholder.com/80" alt="foto cliente"><span>▶</span></div>
-                <div class="midia-thumb"><img src="https://via.placeholder.com/80" alt="foto cliente"></div>
-            </div>
-
+</article>
+</section>
+<section class="description">
+<article class="description-text">
+<h2>Descrição do Produto</h2>
+<hr/>
+<p id="descricao-produto">A descrição do produto vai estar aqui!</p>
+</article>
+</section>
+<div class="vermais">
+<h2>Você também pode gostar dê:</h2>
+</div>
+<section class="ver-mais-relacionados">
+<section id="Camisas">
+<article class="card" data-name="Camisa RMX OFERTA" data-price="47,90R$">
+<img alt="Foto de uma Camisa da rmx store branca" src="../assets/masculino/camisas/camisa rmx store branca.png"/>
+<h4>Camisa RMX Store Masculina Preta - OFERTA</h4>
+<div class="informations-card">
+<p class="preco-card">47,90R$</p>
+<div class="interact">
+<button class="cart">
+<ion-icon name="cart-outline"></ion-icon>
+</button>
+<button class="heart">
+<ion-icon name="heart-outline"></ion-icon>
+</button>
+</div>
+</div>
+<div class="interact-bottom">
+<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
+<button class="btn-view-details">Ver mais</button>
+</div>
+</article>
+<article class="card">
+<img alt="Foto de uma camisa" src="../assets/masculino/camisas/camisa rmx store Preta (logo no meio).png"/>
+<h4>Camisa RMX Store masculina Preta</h4>
+<div class="informations-card">
+<p class="preco-card">69,99R$</p>
+<div class="interact">
+<button class="cart">
+<ion-icon name="cart-outline"></ion-icon>
+</button>
+<button class="heart">
+<ion-icon name="heart-outline"></ion-icon>
+</button>
+</div>
+</div>
+<div class="interact-bottom">
+<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
+<button class="btn-view-details">Ver mais</button>
+</div>
+</article>
+<article class="card">
+<img alt="Foto de uma Calça" src="../assets/masculino/camisas/camisa rmx store vermelha.png"/>
+<h4>Calça RMX Store Masculina Vermelha</h4>
+<div class="informations-card">
+<p class="preco-card">69,99R$</p>
+<div class="interact">
+<button class="cart">
+<ion-icon name="cart-outline"></ion-icon>
+</button>
+<button class="heart">
+<ion-icon name="heart-outline"></ion-icon>
+</button>
+</div>
+</div>
+<div class="interact-bottom">
+<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
+<button class="btn-view-details">Ver mais</button>
+</div>
+</article>
+</section>
+</section>
+<section class="pergunta">
+<h2>Perguntas</h2>
+<div class="box-prt">
+<input id="perguntaDigitada" placeholder="Digite sua pergunta..." type="text"/>
+<button class="btn-prt" onclick="prt()">Perguntar</button>
+</div>
+<a href="descricao.html">Ver todas as perguntas</a>
+</section>
+<section class="avaliacao">
+<h2>Avaliações do Produto</h2>
+<div class="star-avalition">
+<ion-icon name="star"></ion-icon>
+<ion-icon name="star"></ion-icon>
+<ion-icon name="star"></ion-icon>
+<ion-icon name="star"></ion-icon>
+<ion-icon name="star-half-outline"></ion-icon>
+<p>(14)</p>
+</div>
+<!-- FILTROS -->
+<div class="avaliacao-filtros">
+<button class="ativo">Todas (14)</button>
+<button>Com fotos (8)</button>
+<button>Com vídeos (3)</button>
+<button>5 estrelas (10)</button>
+</div>
+<!-- GALERIA DE FOTOS/VIDEOS DOS CLIENTES -->
+<div class="avaliacao-midias">
+<div class="midia-thumb"><img alt="foto cliente" src="https://via.placeholder.com/80"/><span>▶</span></div>
+<div class="midia-thumb"><img alt="foto cliente" src="https://via.placeholder.com/80"/></div>
+<div class="midia-thumb"><img alt="foto cliente" src="https://via.placeholder.com/80"/></div>
+<div class="midia-thumb"><img alt="foto cliente" src="https://via.placeholder.com/80"/><span>▶</span></div>
+<div class="midia-thumb"><img alt="foto cliente" src="https://via.placeholder.com/80"/></div>
+</div>
 <!-- LISTA DE AVALIAÇÕES -->
 <div class="avaliacoes-lista">
-  <div class="avaliacao-card">
-    <div class="avaliacao-topo">
-      <div class="user-info"><img src="https://via.placeholder.com/32"> <strong>João S.</strong></div>
-      <span>★★★★★</span>
-    </div>
-    <p>Camisa muito boa, tecido de qualidade! Chegou rápido.</p>
-    <div class="avaliacao-fotos"><img src="https://via.placeholder.com/60"><img src="https://via.placeholder.com/60"></div>
-    <small>Há 2 dias • Tamanho M • Cor preta</small>
-  </div>
+<div class="avaliacao-card">
+<div class="avaliacao-topo">
+<div class="user-info"><img src="https://via.placeholder.com/32"/> <strong>João S.</strong></div>
+<span>★★★★★</span>
 </div>
-        </section>
-    </main>
-    <footer>
-        <div class="footer-informations">
-            <p>desenvolvido com <ion-icon name="heart-outline"></ion-icon> Por Miguel Romani</p>
-            <p>Todos os direitos reservados</p>
-            <p>₢ 2026</p>
-        </div>
-        <div class="footer-social">
-            <p>Tem alguma duvida?<br>Fale conosco!</p>
-            <p>Nossos meios de comunicação:</p>
-            <div class="footer-redes-sociais">
-                <a href="http://instagram.com/rm_store_011/" target="_blank">
-                    <button id="instagram-footer">
-                        <ion-icon name="logo-instagram"></ion-icon>   
-                    </button>
-                </a>
-                <!--http://wa.me/5511951619314 - whatsapp-->
-                <a href="http://wa.me/5511951619314" target="_blank" rel="noopener noreferrer">
-                    <button id="whatsapp-footer">
-                        <ion-icon name="logo-whatsapp"></ion-icon>
-                    </button>
-                </a>
-                <button id="tiktok-footer">
-                    <ion-icon name="logo-tiktok"></ion-icon>
-                </button>
-            </div>
-        </div>
-    </footer>
+<p>Camisa muito boa, tecido de qualidade! Chegou rápido.</p>
+<div class="avaliacao-fotos"><img src="https://via.placeholder.com/60"/><img src="https://via.placeholder.com/60"/></div>
+<small>Há 2 dias • Tamanho M • Cor preta</small>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="footer-informations">
+<p>desenvolvido com <ion-icon name="heart-outline"></ion-icon> Por Miguel Romani</p>
+<p>Todos os direitos reservados</p>
+<p>₢ 2026</p>
+</div>
+<div class="footer-social">
+<p>Tem alguma duvida?<br/>Fale conosco!</p>
+<p>Nossos meios de comunicação:</p>
+<div class="footer-redes-sociais">
+<a href="http://instagram.com/rm_store_011/" target="_blank">
+<button id="instagram-footer">
+<ion-icon name="logo-instagram"></ion-icon>
+</button>
+</a>
+<!--http://wa.me/5511951619314 - whatsapp-->
+<a href="http://wa.me/5511951619314" rel="noopener noreferrer" target="_blank">
+<button id="whatsapp-footer">
+<ion-icon name="logo-whatsapp"></ion-icon>
+</button>
+</a>
+<button id="tiktok-footer">
+<ion-icon name="logo-tiktok"></ion-icon>
+</button>
+</div>
+</div>
+</footer>
 </body>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
