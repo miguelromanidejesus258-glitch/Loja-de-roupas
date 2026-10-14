@@ -1,12 +1,12 @@
 [
   {
     "id": 0,
-    "name": "Camisa Dry fit Nike Masculina Preta",
-    "price": "90,99R$",
+    "name": "Camisa RMX Store Masculina Preta",
+    "price": "59,99R$",
     "image": "../assets/masculino/camisas/camisa rmx store.png",
     "link": "descricao.html",
-    "description": "Camisa dry fit de alta qualidade, ideal para treino.",
-    "categoria": "mais-vendidos"
+    "description": "Camisa RMX Store Masculina Preta - Dry Fit",
+    "category": "mais-vendidos"
   },
   {
     "id": 1,
@@ -14,7 +14,304 @@
     "price": "45,90R$",
     "image": "../assets/masculino/short/short rmx store - preta.png",
     "link": "descricao.html",
-    "description": "Short confortável para dia a dia.",
-    "categoria": "mais-vendidos"
+    "description": "Short RMX Store Masculino Preta",
+    "category": "mais-vendidos"
+  },
+  {
+    "id": 2,
+    "name": "Camisa RMX Store Masculina Branca",
+    "price": "65,00R$",
+    "image": "../assets/masculino/camisas/camisa rmx store branca.png",
+    "link": "descricao.html",
+    "description": "Camisa RMX Store Masculina Branca",
+    "category": "mais-vendidos"
+  },
+  {
+    "id": 3,
+    "name": "Conjunto RMX Store Masculino Branca",
+    "price": "129,99R$",
+    "image": "../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png",
+    "link": "descricao.html",
+    "description": "Eleve seu estilo street com o Conjunto RMX Store Masculino. Desenvolvido para quem não abre mão do conforto e da autenticidade.",
+    "category": "mais-vendidos"
+  },
+  {
+    "id": 4,
+    "name": "Blusa RMX Store branca Masculina",
+    "price": "129,99R$",
+    "image": "../assets/masculino/Blusas/Blusa RMX Store branca (logo no meio).png",
+    "link": "descricao.html",
+    "description": "Blusa RMX Store branca Masculina",
+    "category": "mais-vendidos"
+  },
+  {
+    "id": 5,
+    "name": "Camisa RMX Store Masculina Branca",
+    "price": "69,99R$",
+    "image": "../assets/masculino/camisas/camisa rmx store branca.png",
+    "link": "descricao.html",
+    "description": "Camisa RMX Store Masculina Branca",
+    "category": "Camisas"
+  },
+  {
+    "id": 6,
+    "name": "Camisa RMX Store masculina Preta",
+    "price": "69,99R$",
+    "image": "../assets/masculino/camisas/camisa rmx store Preta (logo no meio).png",
+    "link": "descricao.html",
+    "description": "Camisa RMX Store masculina Preta",
+    "category": "Camisas"
+  },
+  {
+    "id": 7,
+    "name": "Calça RMX Store Masculina Vermelha",
+    "price": "69,99R$",
+    "image": "../assets/masculino/camisas/camisa rmx store vermelha.png",
+    "link": "descricao.html",
+    "description": "Calça RMX Store Masculina Vermelha",
+    "category": "Camisas"
+  },
+  {
+    "id": 8,
+    "name": "Camisa RMX Store Masculina - Preta polo",
+    "price": "69,99R$",
+    "image": "../assets/masculino/camisas/camisa rmx store.png",
+    "link": "descricao.html",
+    "description": "Camisa RMX Store Masculina - Preta polo",
+    "category": "Camisas"
+  },
+  {
+    "id": 9,
+    "name": "Camisa RMX Store Masculina - Branca polo",
+    "price": "69,99R$",
+    "image": "../assets/masculino/camisas/camisa rmx store branca no meio.png",
+    "link": "descricao.html",
+    "description": "Camisa RMX Store Masculina - Branca polo",
+    "category": "Camisas"
+  },
+  {
+    "id": 10,
+    "name": "Short RMX Store - Branca",
+    "price": "69,99R$",
+    "image": "../assets/masculino/short/short rmx store - branca.png",
+    "link": "descricao.html",
+    "description": "Short RMX Store - Branca",
+    "category": "short"
+  },
+  {
+    "id": 11,
+    "name": "Short RMX Store Dragon - Preta",
+    "price": "69,99R$",
+    "image": "../assets/masculino/short/short rmx store - preta. (arte)png.jpg",
+    "link": "descricao.html",
+    "description": "Short RMX Store Dragon - Preta",
+    "category": "short"
+  },
+  {
+    "id": 12,
+    "name": "Short RMX Store - Preta",
+    "price": "69,99R$",
+    "image": "../assets/masculino/short/short rmx store - preta.png",
+    "link": "descricao.html",
+    "description": "Short RMX Store - Preta",
+    "category": "short"
+  },
+  {
+    "id": 13,
+    "name": "Short RMX Store Edição beach - Areia",
+    "price": "69,99R$",
+    "image": "../assets/masculino/short/short rmx store - areia edição.png",
+    "link": "descricao.html",
+    "description": "Short RMX Store Edição beach - Areia",
+    "category": "short"
+  },
+  {
+    "id": 14,
+    "name": "Short RMX Store - Areia",
+    "price": "69,99R$",
+    "image": "../assets/masculino/short/short rmx store - areia.png",
+    "link": "descricao.html",
+    "description": "Short RMX Store - Areia",
+    "category": "short"
+  },
+  {
+    "id": 15,
+    "name": "Calça RMX Store Preta",
+    "price": "69,99R$",
+    "image": "../assets/masculino/calças/calça rmx store.jpg",
+    "link": "descricao.html",
+    "description": "Calça RMX Store Preta",
+    "category": "calca"
+  },
+  {
+    "id": 16,
+    "name": "Calça RMX Store Preta",
+    "price": "69,99R$",
+    "image": "../assets/masculino/calças/Camisa rmx store preta.jpg",
+    "link": "descricao.html",
+    "description": "Calça RMX Store Preta",
+    "category": "calca"
+  },
+  {
+    "id": 17,
+    "name": "Calça jogador Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER - trocar",
+    "category": "calca"
+  },
+  {
+    "id": 18,
+    "name": "Blusa quiksilver masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "calca"
+  },
+  {
+    "id": 19,
+    "name": "Blusa BMW puma Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "calca"
+  },
+  {
+    "id": 20,
+    "name": "Camisa Dry fit Nike Masculina",
+    "price": "69,99R$",
+    "image": "../assets/banner - hero.jpg",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER - banner",
+    "category": "Blusa"
+  },
+  {
+    "id": 21,
+    "name": "Short Dry fit Nike Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "Blusa"
+  },
+  {
+    "id": 22,
+    "name": "Calça jogador Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "Blusa"
+  },
+  {
+    "id": 23,
+    "name": "Blusa quiksilver masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "Blusa"
+  },
+  {
+    "id": 24,
+    "name": "Blusa BMW puma Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "Blusa"
+  },
+  {
+    "id": 25,
+    "name": "Camisa Dry fit Nike Masculina",
+    "price": "69,99R$",
+    "image": "../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png",
+    "link": "descricao.html",
+    "description": "Conjunto RMX",
+    "category": "conjunto"
+  },
+  {
+    "id": 26,
+    "name": "Short Dry fit Nike Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "conjunto"
+  },
+  {
+    "id": 27,
+    "name": "Calça jogador Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "conjunto"
+  },
+  {
+    "id": 28,
+    "name": "Blusa quiksilver masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "conjunto"
+  },
+  {
+    "id": 29,
+    "name": "Blusa BMW puma Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "conjunto"
+  },
+  {
+    "id": 30,
+    "name": "Calça RMX Store Preta",
+    "price": "69,99R$",
+    "image": "../assets/masculino/calças/calça rmx store.jpg",
+    "link": "descricao.html",
+    "description": "Calça RMX Store Preta",
+    "category": "promocao"
+  },
+  {
+    "id": 31,
+    "name": "Calça RMX Store Preta",
+    "price": "69,99R$",
+    "image": "../assets/masculino/calças/Camisa rmx store preta.jpg",
+    "link": "descricao.html",
+    "description": "Calça RMX Store Preta",
+    "category": "promocao"
+  },
+  {
+    "id": 32,
+    "name": "Calça jogador Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "promocao"
+  },
+  {
+    "id": 33,
+    "name": "Blusa quiksilver masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "promocao"
+  },
+  {
+    "id": 34,
+    "name": "Blusa BMW puma Masculina",
+    "price": "69,99R$",
+    "image": "#",
+    "link": "descricao.html",
+    "description": "PLACEHOLDER",
+    "category": "promocao"
   }
 ]

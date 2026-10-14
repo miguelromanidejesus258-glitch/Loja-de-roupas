@@ -1,818 +1,944 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="favicon.ico" rel="icon" type="image/x-icon"/>
-<link href="../assets/logo/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link href="../assets/logo/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-<link href="../assets/logo/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-<link href="../vscode/site.webmanifest" rel="manifest"/>
-<link href="../ico/favicon.ico" rel="shortcut icon"/>
-<title>RMX Store | Home</title>
-<link href="../src/css/loja.css" rel="stylesheet"/>
-<script src="../src/js/loja.js"></script>
-<script src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js" type="module"></script>
-<script nomodule="" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo/favicon-16x16.png">
+    <link rel="manifest" href="../vscode/site.webmanifest">
+    <link rel="shortcut icon" href="../ico/favicon.ico">
+    <title>RMX Store | Home</title>
+    <link rel="stylesheet" href="../src/css/loja.css">
+    <script src="../src/js/loja.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
 </head>
 <body class="loja">
-<header>
-<h1><a href="loja.html">RMX Store</a></h1>
-<div class="options">
-<nav>
-<ul>
-<li><a href="#Camisas">Camisas</a></li>
-<li><a href="#short">Shorts</a></li>
-<li><a href="#calca">Calças</a></li>
-<li><a href="#Blusa">Blusas</a></li>
-<li><a href="#conjunto">Conjuntos</a></li>
-<li><a href="#promocao">Promoções</a></li>
-</ul>
-</nav>
-</div>
-<div class="buttons-interact-header">
-<div class="search">
-<input id="searchDigitado" placeholder="Digite algum Produto." type="search"/>
-<button class="button-search">
-<ion-icon name="search-outline"></ion-icon>
-</button>
-</div>
-<div class="interact-header-cart-heart">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-<button class="config-header">
-<ion-icon name="cog-outline"></ion-icon>
-</button>
-</div>
-</header>
-<main>
-<!-- ########-HERO-######## -->
-<section id="hero">
-<div class="banner">
-<p class="p1">PROMO 2027</p>
-<h2>PROMOÇÃO DO 11.11</h2>
-<p class="p2">Não perca essa oportunidade!</p>
-<a href="#promocao">
-<button>Confira já</button>
-</a>
-</div>
-</section>
-<section id="mais-vendidos">
-<div class="titulo-secao">
-<h3><ion-icon name="flame-outline"></ion-icon> Mais vendidos</h3>
-<a href="#">Ver mais...</a>
-</div>
-<div class="grid-produtos">
-<article class="card" data-image="../" data-link="https://seu-link-de-venda.com" data-name="Camisa RMX Store Masculina Preta - OFERTA IMPERDÍVEL" data-price="47,90R$">
-<img alt="Foto de uma Camisa" src="../assets/masculino/camisas/camisa rmx store.png"/>
-<h4>Camisa RMX Store Masculina Preta - OFERTA</h4>
-<div class="informations-card">
-<p class="preco-card">47,90R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()"><a href="#">Compre Agora</a></button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card" data-image="../assets/masculino/short/short rmx store - preta.png" data-link="descricao.html" data-name="Short RMX Store Masculino Preta" data-price="45,90R$">
-<img alt="Foto de uma short" src="../assets/masculino/short/short rmx store - preta.png"/>
-<h4>Short RMX Store Masculino Preta</h4>
-<div class="informations-card">
-<p class="preco-card">45,90R$</p>
-<div class="interact">
-<button class="cart" onclick="adicionarAoCarrinho()">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart" onclick="curtir()">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card" data-image="../assets/masculino/camisas/camisa rmx store branca.png" data-link="descricao.html" data-name="Camisa RMX Store Masculina Branca" data-price="65,00R$">
-<img alt="Foto de uma Camisa da rmx store" src="../assets/masculino/camisas/camisa rmx store branca.png"/>
-<h4>Camisa RMX Store Masculina Branca</h4>
-<div class="informations-card">
-<p class="preco-card">65,00R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card" data-description="Eleve seu estilo street com o Conjunto RMX Store Masculino. Desenvolvido para quem não abre mão do conforto e da autenticidade, o kit traz uma camiseta oversized de caimento solto e moderno, acompanhada de um calção com ajuste por cordão na cintura. Destaques do produto:Estilo Streetwear Minimalista: Design limpo em branco com o logo RMX em destaque no peito e na perna do calção.Conforto Total: Confeccionado em tecido leve e respirável, ideal para o dia a dia, treinos ou momentos de lazer.Ajuste Perfeito: Calção com elástico e cordão regulável, garantindo excelente caimento e flexibilidade.Versatilidade: Peças práticas que combinam facilmente com qualquer tênis ou acessório.Garanta o seu visual completo com máxima elegância e praticidade!" data-image="../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png" data-link="descricao.html" data-name="Conjunto RMX Store Masculino Branca" data-price="129,99R$">
-<img alt="Foto de um Conjunto da rmx store" src="../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png"/>
-<h4>Conjunto RMX Store Masculino Branca</h4>
-<div class="informations-card">
-<p class="preco-card">129,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card" data-image="../assets/masculino/Blusas/Blusa RMX Store branca (logo no meio).png" data-link="descricao.html" data-name="Blusa RMX Store branca Masculina" data-price="129,99R$">
-<img alt="Foto de uma blusa" src="../assets/masculino/Blusas/Blusa RMX Store branca (logo no meio).png"/>
-<h4>Blusa RMX Store branca Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">129,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-</div>
-</section>
-<section id="Camisas">
-<div class="titulo-secao">
-<h3>Camisas</h3>
-<a href="#">Ver mais...</a>
-</div>
-<div class="grid-produtos">
-<article class="card">
-<img alt="Foto de uma Camisa da rmx store branca" src="../assets/masculino/camisas/camisa rmx store branca.png"/>
-<h4>Camisa RMX Store Masculina Branca</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma camisa" src="../assets/masculino/camisas/camisa rmx store Preta (logo no meio).png"/>
-<h4>Camisa RMX Store masculina Preta</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma Calça" src="../assets/masculino/camisas/camisa rmx store vermelha.png"/>
-<h4>Calça RMX Store Masculina Vermelha</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="../assets/masculino/camisas/camisa rmx store.png"/>
-<h4>Camisa RMX Store Masculina - Preta polo</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="../assets/masculino/camisas/camisa rmx store branca no meio.png"/>
-<h4>Camisa RMX Store Masculina - Branca polo</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-</div>
-</section>
-<section id="short">
-<div class="titulo-secao">
-<h3>Shorts</h3>
-<a href="#">Ver mais...</a>
-</div>
-<div class="grid-produtos">
-<article class="card">
-<img alt="Foto de uma Camisa" src="../assets/masculino/short/short rmx store - branca.png"/>
-<h4>Short RMX Store - Branca</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma short" src="../assets/masculino/short/short rmx store - preta. (arte)png.jpg"/>
-<h4>Short RMX Store Dragon - Preta</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma Calça" src="../assets/masculino/short/short rmx store - preta.png"/>
-<h4>Short RMX Store - Preta</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="../assets/masculino/short/short rmx store - areia edição.png"/>
-<h4>Short RMX Store Edição beach - Areia</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="../assets/masculino/short/short rmx store - areia.png"/>
-<h4>Short RMX Store - Areia</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-</div>
-</section>
-<section id="calca">
-<div class="titulo-secao">
-<h3>Calças</h3>
-<a href="#">Ver mais...</a>
-</div>
-<div class="grid-produtos">
-<article class="card">
-<img alt="Foto de uma Calça" src="../assets/masculino/calças/calça rmx store.jpg"/>
-<h4>Calça RMX Store Preta</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma short" src="../assets/masculino/calças/Camisa rmx store preta.jpg"/>
-<h4>Calça RMX Store Preta</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma Calça" src="#"/>
-<h4>Calça jogador Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa quiksilver masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa BMW puma Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-</div>
-</section>
-<section id="Blusa">
-<div class="titulo-secao">
-<h3>Blusas de frio</h3>
-<a href="#">Ver mais...</a>
-</div>
-<div class="grid-produtos">
-<article class="card">
-<img alt="Foto de uma Camisa" src="../assets/banner - hero.jpg"/>
-<h4>Camisa Dry fit Nike Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma short" src="#"/>
-<h4>Short Dry fit Nike Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma Calça" src="#"/>
-<h4>Calça jogador Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa quiksilver masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa BMW puma Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-</div>
-</section>
-<section id="conjunto">
-<div class="titulo-secao">
-<h3>Conjuntos</h3>
-<a href="#">Ver mais...</a>
-</div>
-<div class="grid-produtos">
-<article class="card">
-<img alt="Foto de uma Camisa" src="../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png "/>
-<h4>Camisa Dry fit Nike Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma short" src="#"/>
-<h4>Short Dry fit Nike Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma Calça" src="#"/>
-<h4>Calça jogador Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa quiksilver masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa BMW puma Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-</div>
-</section>
-<section id="promocao">
-<div class="titulo-secao">
-<h3>Promoções</h3>
-<a href="#">Ver mais...</a>
-</div>
-<div class="grid-produtos">
-<article class="card">
-<img alt="Foto de uma Calça" src="../assets/masculino/calças/calça rmx store.jpg"/>
-<h4>Calça RMX Store Preta</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma short" src="../assets/masculino/calças/Camisa rmx store preta.jpg"/>
-<h4>Calça RMX Store Preta</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma Calça" src="#"/>
-<h4>Calça jogador Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa quiksilver masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-<article class="card">
-<img alt="Foto de uma blusa" src="#"/>
-<h4>Blusa BMW puma Masculina</h4>
-<div class="informations-card">
-<p class="preco-card">69,99R$</p>
-<div class="interact">
-<button class="cart">
-<ion-icon name="cart-outline"></ion-icon>
-</button>
-<button class="heart">
-<ion-icon name="heart-outline"></ion-icon>
-</button>
-</div>
-</div>
-<div class="interact-bottom">
-<button class="btn-compraragora" onclick="compraragora()">Compre Agora</button>
-<button class="btn-view-details">Ver mais</button>
-</div>
-</article>
-</div>
-</section>
-</main>
-<footer>
-<div class="footer-informations">
-<p>desenvolvido com <ion-icon name="heart-outline"></ion-icon> Por Miguel Romani</p>
-<p>Todos os direitos reservados</p>
-<p>₢ 2026</p>
-</div>
-<div class="footer-social">
-<p>Tem alguma duvida?<br/>Fale conosco!</p>
-<p>Nossos meios de comunicação:</p>
-<div class="footer-redes-sociais">
-<a href="http://instagram.com/rm_store_011/" target="_blank">
-<button id="instagram-footer">
-<ion-icon name="logo-instagram"></ion-icon>
-</button>
-</a>
-<!--http://wa.me/5511951619314 - whatsapp-->
-<a href="#" rel="noopener noreferrer" target="_blank">
-<button id="whatsapp-footer">
-<ion-icon name="logo-whatsapp"></ion-icon>
-</button>
-</a>
-<button id="tiktok-footer">
-<ion-icon name="logo-tiktok"></ion-icon>
-</button>
-</div>
-</div>
-</footer>
-<script>
+    <header>
+        <h1><a href="loja.html">RMX Store</a></h1>
+        <div class="options">
+            <nav>
+                <ul>
+                    <li><a href="#Camisas">Camisas</a></li>
+                    <li><a href="#short">Shorts</a></li>
+                    <li><a href="#calca">Calças</a></li>
+                    <li><a href="#Blusa">Blusas</a></li>
+                    <li><a href="#conjunto">Conjuntos</a></li>
+                    <li><a href="#promocao">Promoções</a></li>   
+                </ul>
+            </nav>
+        </div>
+        <div class="buttons-interact-header">
+            
+            <div class="search">
+                <input type="search" id="searchDigitado" placeholder="Digite algum Produto.">
+                <button class="button-search">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+            </div>
+            <div class="interact-header-cart-heart">
+                <button class="cart">
+                    <ion-icon name="cart-outline"></ion-icon>
+                </button>
+                <button class="heart">
+                    <ion-icon name="heart-outline"></ion-icon>
+                </button>
+            </div>
+            <button class="config-header">
+                <ion-icon name="cog-outline"></ion-icon>
+            </button>
+        </div>
+        
+    </header>
+    <main>
+        <!-- ########-HERO-######## -->
+        <section id="hero">
+            <div class="banner">
+                <p class="p1">PROMO 2027</p>
+                <h2>PROMOÇÃO DO 11.11</h2>
+                <p class="p2">Não perca essa oportunidade!</p>
+                <a href="#promocao">
+                    <button>Confira já</button>
+                </a>
+            </div>
+        </section>
+        <section id="mais-vendidos">
+            <div class="titulo-secao">
+                <h3><ion-icon name="flame-outline"></ion-icon> Mais vendidos</h3>
+                <a href="#">Ver mais...</a>
+            </div>
+            <div class="grid-produtos">
+                <article class="card" data-name="Camisa Dry fit Nike Masculina Preta" data-price="90,99R$" data-image="../" data-link="descricao.html">
+                    <img src="../assets/masculino/camisas/camisa rmx store.png" alt="Foto de uma Camisa">
+                    <h4>Camisa RMX Store Masculina Preta</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">59,99R$</p>
+                        <div class="interact">
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora"><a href="#">Compre Agora</a></button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card" data-name="Short RMX Store Masculino Preta" data-price="45,90R$" data-image="../assets/masculino/short/short rmx store - preta.png" data-link="descricao.html">
+                    <img src="../assets/masculino/short/short rmx store - preta.png" alt="Foto de uma short">
+                    <h4>Short RMX Store Masculino Preta</h4>
+                
+                    <div class="informations-card">
+
+                        <p class="preco-card">45,90R$</p>
+
+                        <div class="interact">
+                            
+                            <button class="cart" onclick="adicionarAoCarrinho()">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart" onclick="curtir()">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card" data-name="Camisa RMX Store Masculina Branca" data-price="65,00R$" data-image="../assets/masculino/camisas/camisa rmx store branca.png" data-link="descricao.html">
+                    <img src="../assets/masculino/camisas/camisa rmx store branca.png" alt="Foto de uma Camisa da rmx store">
+                    <h4>Camisa RMX Store Masculina Branca</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">65,00R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                    
+                        </div>
+                   
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card" data-name="Conjunto RMX Store Masculino Branca" data-price="129,99R$" data-image="../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png" data-link="descricao.html" data-description="Eleve seu estilo street com o Conjunto RMX Store Masculino. Desenvolvido para quem não abre mão do conforto e da autenticidade, o kit traz uma camiseta oversized de caimento solto e moderno, acompanhada de um calção com ajuste por cordão na cintura. Destaques do produto:Estilo Streetwear Minimalista: Design limpo em branco com o logo RMX em destaque no peito e na perna do calção.Conforto Total: Confeccionado em tecido leve e respirável, ideal para o dia a dia, treinos ou momentos de lazer.Ajuste Perfeito: Calção com elástico e cordão regulável, garantindo excelente caimento e flexibilidade.Versatilidade: Peças práticas que combinam facilmente com qualquer tênis ou acessório.Garanta o seu visual completo com máxima elegância e praticidade!">
+                    <img src="../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png" alt="Foto de um Conjunto da rmx store">
+                    <h4>Conjunto RMX Store Masculino Branca</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">129,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card" data-name="Blusa RMX Store branca Masculina" data-price="129,99R$" data-image="../assets/masculino/Blusas/Blusa RMX Store branca (logo no meio).png" data-link="descricao.html">
+                    <img src="../assets/masculino/Blusas/Blusa RMX Store branca (logo no meio).png" alt="Foto de uma blusa">
+                    <h4>Blusa RMX Store branca Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">129,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="Camisas">
+            <div class="titulo-secao">
+                <h3>Camisas</h3>
+                <a href="#">Ver mais...</a>
+            </div>
+            <div class="grid-produtos">
+                <article class="card">
+                    <img src="../assets/masculino/camisas/camisa rmx store branca.png" alt="Foto de uma Camisa da rmx store branca">
+                    <h4>Camisa RMX Store Masculina Branca</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/camisas/camisa rmx store Preta (logo no meio).png" alt="Foto de uma camisa">
+                    <h4>Camisa RMX Store masculina Preta</h4>
+                
+                    <div class="informations-card">
+
+                        <p class="preco-card">69,99R$</p>
+
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/camisas/camisa rmx store vermelha.png" alt="Foto de uma Calça">
+                    <h4>Calça RMX Store Masculina Vermelha</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                    
+                        </div>
+                   
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/camisas/camisa rmx store.png" alt="Foto de uma blusa">
+                    <h4>Camisa RMX Store Masculina - Preta polo</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/camisas/camisa rmx store branca no meio.png" alt="Foto de uma blusa">
+                    <h4>Camisa RMX Store Masculina - Branca polo</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="short">
+            <div class="titulo-secao">
+                <h3>Shorts</h3>
+                <a href="#">Ver mais...</a>
+            </div>
+            <div class="grid-produtos">
+                <article class="card">
+                    <img src="../assets/masculino/short/short rmx store - branca.png" alt="Foto de uma Camisa">
+                    <h4>Short RMX Store - Branca</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/short/short rmx store - preta. (arte)png.jpg" alt="Foto de uma short">
+                    <h4>Short RMX Store Dragon - Preta</h4>
+                
+                    <div class="informations-card">
+
+                        <p class="preco-card">69,99R$</p>
+
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/short/short rmx store - preta.png" alt="Foto de uma Calça">
+                    <h4>Short RMX Store - Preta</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                    
+                        </div>
+                   
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/short/short rmx store - areia edição.png" alt="Foto de uma blusa">
+                    <h4>Short RMX Store Edição beach - Areia</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/short/short rmx store - areia.png" alt="Foto de uma blusa">
+                    <h4>Short RMX Store - Areia</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="calca">
+            <div class="titulo-secao">
+                <h3>Calças</h3>
+                <a href="#">Ver mais...</a>
+            </div>
+            <div class="grid-produtos">
+                <article class="card">
+                    <img src="../assets/masculino/calças/calça rmx store.jpg" alt="Foto de uma Calça">
+                    <h4>Calça RMX Store Preta</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/calças/Camisa rmx store preta.jpg" alt="Foto de uma short">
+                    <h4>Calça RMX Store Preta</h4>
+                
+                    <div class="informations-card">
+
+                        <p class="preco-card">69,99R$</p>
+
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma Calça">
+                    <h4>Calça jogador Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                    
+                        </div>
+                   
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa quiksilver masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa BMW puma Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="Blusa">
+            <div class="titulo-secao">
+                <h3>Blusas de frio</h3>
+                <a href="#">Ver mais...</a>
+            </div>
+            <div class="grid-produtos">
+                <article class="card">
+                    <img src="../assets/banner - hero.jpg" alt="Foto de uma Camisa">
+                    <h4>Camisa Dry fit Nike Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma short">
+                    <h4>Short Dry fit Nike Masculina</h4>
+                
+                    <div class="informations-card">
+
+                        <p class="preco-card">69,99R$</p>
+
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma Calça">
+                    <h4>Calça jogador Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                    
+                        </div>
+                   
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa quiksilver masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa BMW puma Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="conjunto">
+            <div class="titulo-secao">
+                <h3>Conjuntos</h3>
+                <a href="#">Ver mais...</a>
+            </div>
+            <div class="grid-produtos">
+                <article class="card">
+                    <img src="../assets/masculino/conjuntos/Conjunto da rmx branca (camisa e short).png " alt="Foto de uma Camisa">
+                    <h4>Camisa Dry fit Nike Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma short">
+                    <h4>Short Dry fit Nike Masculina</h4>
+                
+                    <div class="informations-card">
+
+                        <p class="preco-card">69,99R$</p>
+
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma Calça">
+                    <h4>Calça jogador Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                    
+                        </div>
+                   
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa quiksilver masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa BMW puma Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="promocao">
+            <div class="titulo-secao">
+                <h3>Promoções</h3>
+                <a href="#">Ver mais...</a>
+            </div>
+            <div class="grid-produtos">
+                <article class="card">
+                    <img src="../assets/masculino/calças/calça rmx store.jpg" alt="Foto de uma Calça">
+                    <h4>Calça RMX Store Preta</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="../assets/masculino/calças/Camisa rmx store preta.jpg" alt="Foto de uma short">
+                    <h4>Calça RMX Store Preta</h4>
+                
+                    <div class="informations-card">
+
+                        <p class="preco-card">69,99R$</p>
+
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma Calça">
+                    <h4>Calça jogador Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                    
+                        </div>
+                   
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa quiksilver masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="#" alt="Foto de uma blusa">
+                    <h4>Blusa BMW puma Masculina</h4>
+                
+                    <div class="informations-card">
+                        <p class="preco-card">69,99R$</p>
+                        <div class="interact">
+                            
+                            <button class="cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </button>
+                            <button class="heart">
+                                <ion-icon name="heart-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="interact-bottom">
+                       <button onclick="compraragora()" class="btn-compraragora">Compre Agora</button> 
+                       <button class="btn-view-details">Ver mais</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-informations">
+            <p>desenvolvido com <ion-icon name="heart-outline"></ion-icon> Por Miguel Romani</p>
+            <p>Todos os direitos reservados</p>
+            <p>₢ 2026</p>
+        </div>
+        <div class="footer-social">
+            <p>Tem alguma duvida?<br>Fale conosco!</p>
+            <p>Nossos meios de comunicação:</p>
+            <div class="footer-redes-sociais">
+                <a href="http://instagram.com/rm_store_011/" target="_blank">
+                    <button id="instagram-footer">
+                        <ion-icon name="logo-instagram"></ion-icon>   
+                    </button>
+                </a>
+                <!--http://wa.me/5511951619314 - whatsapp-->
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                    <button id="whatsapp-footer">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                    </button>
+                </a>
+                <button id="tiktok-footer">
+                    <ion-icon name="logo-tiktok"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </footer>
+    <script>
         window.addEventListener("scroll", function(){
         const header = document.querySelector("header");
         if (window.scrollY > 50) {
