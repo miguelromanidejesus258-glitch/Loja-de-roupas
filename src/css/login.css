@@ -1,0 +1,102 @@
+/* Configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1d1d1d; /* Quase preto */
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff; /* Cor padrão do texto */
+}
+
+/* Container de Login */
+.login-container {
+    background-color: #2a2a2a; /* Tom um pouco mais claro que o fundo */
+    padding: 40px;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* Sombra para dar profundidade */
+    text-align: center;
+    width: 350px; /* Largura fixa */
+    max-width: 90%; /* Para responsividade em telas menores */
+}
+
+/* Placeholder para a logo RMX */
+.logo-placeholder {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffffff; /* Cor da logo */
+    margin-bottom: 30px;
+}
+
+/* Grupo de input (label + input) */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinha o label à esquerda */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #cccccc; /* Cinza sutil para o label */
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%; /* Ocupa toda a largura do input-group */
+    padding: 12px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a3a3a; /* Fundo escuro para os inputs */
+    color: #ffffff; /* Texto claro nos inputs */
+    font-size: 16px;
+    outline: none; /* Remove o contorno padrão ao focar */
+}
+
+/* Botão de entrar */
+.login-button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #00bfff; /* Azul vibrante para destaque */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px; /* Espaço acima do botão */
+    transition: background-color 0.3s ease; /* Transição suave para hover */
+}
+
+.login-button:hover {
+    background-color: #00a0d6; /* Cor um pouco mais escura no hover */
+}
+
+/* Link de cadastro */
+.signup-link {
+    margin-top: 25px; /* Espaço acima do link */
+    font-size: 14px;
+    color: #cccccc; /* Cinza sutil */
+}
+
+.signup-link a {
+    color: #00bfff; /* Cor de destaque para o link */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Transição suave para hover */
+}
+
+.signup-link a:hover {
+    color: #00a0d6; /* Cor um pouco mais escura no hover */
+    text-decoration: underline;
+}
+
+img{
+    width: 100px;
+    border-radius: 8px;
+}
