@@ -1,3 +1,15 @@
+/* Definição de cores e variáveis da RMX */
+:root {
+    --cor-fundo: #1d1d1d;          /* Fundo quase preto */
+    --cor-container: #2a2a2a;      /* Caixa central */
+    --cor-input: #3a3a3a;          /* Fundo dos campos */
+    --cor-texto: #ffffff;          /* Texto branco */
+    --cor-texto-claro: #cccccc;    /* Texto mais suave */
+    --cor-dourado: #d4af37;        /* Dourado principal */
+    --cor-dourado-escuro: #b8962e;  /* Dourado mais escuro para hover */
+    --cor-borda-dourada: #f0c848;  /* Borda brilhante dourada */
+}
+
 /* Configurações gerais */
 * {
     margin: 0;
@@ -6,97 +18,104 @@
 }
 
 body {
-    background-color: #1d1d1d; /* Quase preto */
+    background-color: var(--cor-fundo);
     font-family: Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ffffff; /* Cor padrão do texto */
+    color: var(--cor-texto);
 }
 
 /* Container de Login */
 .login-container {
-    background-color: #2a2a2a; /* Tom um pouco mais claro que o fundo */
+    background-color: var(--cor-container);
     padding: 40px;
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* Sombra para dar profundidade */
+    border-radius: 12px;
+    border: 1px solid var(--cor-borda-dourada);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
     text-align: center;
-    width: 350px; /* Largura fixa */
-    max-width: 90%; /* Para responsividade em telas menores */
+    width: 380px;
+    max-width: 90%;
 }
 
-/* Placeholder para a logo RMX */
+/* Logo RMX */
 .logo-placeholder {
-    font-size: 32px;
-    font-weight: bold;
-    color: #ffffff; /* Cor da logo */
     margin-bottom: 30px;
 }
 
-/* Grupo de input (label + input) */
+.logo-placeholder img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Grupo de Input */
 .input-group {
-    margin-bottom: 20px;
-    text-align: left; /* Alinha o label à esquerda */
+    margin-bottom: 22px;
+    text-align: left;
 }
 
 .input-group label {
     display: block;
     margin-bottom: 8px;
-    color: #cccccc; /* Cinza sutil para o label */
+    color: var(--cor-texto-claro);
     font-size: 14px;
 }
 
 .input-group input {
-    width: 100%; /* Ocupa toda a largura do input-group */
-    padding: 12px 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3a3a3a; /* Fundo escuro para os inputs */
-    color: #ffffff; /* Texto claro nos inputs */
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background-color: var(--cor-input);
+    color: var(--cor-texto);
     font-size: 16px;
-    outline: none; /* Remove o contorno padrão ao focar */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Botão de entrar */
+.input-group input:focus {
+    border-color: var(--cor-dourado);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.25);
+}
+
+/* Botão de Entrar */
 .login-button {
     width: 100%;
-    padding: 12px 20px;
-    background-color: #00bfff; /* Azul vibrante para destaque */
-    color: #ffffff;
+    padding: 13px 20px;
+    background-color: var(--cor-dourado);
+    color: #000000;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px; /* Espaço acima do botão */
-    transition: background-color 0.3s ease; /* Transição suave para hover */
+    margin-top: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .login-button:hover {
-    background-color: #00a0d6; /* Cor um pouco mais escura no hover */
+    background-color: var(--cor-dourado-escuro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
-/* Link de cadastro */
+/* Link de Cadastro */
 .signup-link {
-    margin-top: 25px; /* Espaço acima do link */
+    margin-top: 25px;
     font-size: 14px;
-    color: #cccccc; /* Cinza sutil */
+    color: var(--cor-texto-claro);
 }
 
-.signup-link a {
-    color: #00bfff; /* Cor de destaque para o link */
+.signup-link a { 
+    color: var(--cor-dourado);
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease; /* Transição suave para hover */
+    transition: color 0.3s ease;
 }
 
 .signup-link a:hover {
-    color: #00a0d6; /* Cor um pouco mais escura no hover */
+    color: var(--cor-borda-dourada);
     text-decoration: underline;
-}
-
-img{
-    width: 100px;
-    border-radius: 8px;
 }
