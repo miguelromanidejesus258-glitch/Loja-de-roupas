@@ -1,0 +1,38 @@
+from sqlalchemy import ForeignKey, Integer, String, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from .database import Base
+
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    nome: Mapped[str] = mapped_column(String(120))
+    email: Mapped[str] = mapped_column(String(180), unique=True, index=True)
+    senha_hash: Mapped[str] = mapped_column(String(200))
+    token: Mapped[str | None] = mapped_column(String(80), nullable=True, index=True)
+
+
+class Produto(Base):
+    __tablename__ = "produtos"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String(180))
+    price: Mapped[str] = mapped_column(String(40))
+    image: Mapped[str] = mapped_column(String(400), default="")
+    link: Mapped[str] = mapped_column(String(200), default="descricao.html")
+    description: Mapped[str] = mapped_column(String(2000), default="")
+    category: Mapped[str] = mapped_column(String(60), default="mais-vendidos")
+
+
+class ItemCarrinho(Base):
+    __tablename__ = "carrinho"
+    __table_args__ = (UniqueConstraint("usuario_id", "produto_id"),)
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    usuario_id: Mapped[int] = mapped_column(ForeignKey("usuarios.id"))
+    produto_id: Mapped[int] = mapped_column(ForeignKey("produtos.id"))
+    quantidade: Mapped[int] = mapped_column(Integer, default=1)
+
+    produto: Mapped[Produto] = relationship()

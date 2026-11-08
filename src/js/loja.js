@@ -41,9 +41,22 @@ function acharSecao(catId) {
 
 async function carregarProdutos() {
   try {
+    const api = await fetch('/api/produtos');
+    if (api.ok) {
+      const dados = await api.json();
+      if (Array.isArray(dados) && dados.length > 0) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+        return dados;
+      }
+    }
+  } catch (e) {
+    console.log('API indisponível, usando arquivo local');
+  }
+
+  try {
     const salvo = localStorage.getItem(STORAGE_KEY);
     if (salvo && JSON.parse(salvo).length > 0) return JSON.parse(salvo);
-    
+
     const res = await fetch(JSON_PATH);
     if (!res.ok) throw new Error(`JSON não encontrado (status: ${res.status})`);
     const dados = await res.json();
@@ -117,6 +130,7 @@ function renderizarComJSON(produtos) {
       const article = document.createElement('article');
       article.className = 'card';
       const imagem = corrigirCaminhoImagem(prod.imagem || prod.image);
+      if (prod.id != null) article.dataset.id = prod.id;
       article.dataset.name = prod.nome || prod.name;
       article.dataset.price = prod.preco || prod.price;
       article.dataset.image = imagem;
@@ -146,6 +160,16 @@ function ativarBotoes() {
     btn.onclick = () => {
       const card = btn.closest('.card');
       showCartAdded(card.dataset.name);
+      const token = localStorage.getItem('rmx_token');
+      if (!token || !card.dataset.id) return;
+      fetch('/api/carrinho', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        },
+        body: JSON.stringify({ product_id: Number(card.dataset.id), quantidade: 1 })
+      }).catch(() => {});
     };
   });
 

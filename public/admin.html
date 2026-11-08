@@ -26,10 +26,34 @@
 
 <script>
 let produtos = [];
-fetch('produtos.json')
-.then(r=>r.json())
-.then(data=>{ produtos=data; render(); })
-.catch(()=>{ produtos=[]; render(); });
+const API = '/api/produtos';
+
+function tokenAdmin() {
+  return localStorage.getItem('rmx_token') || '';
+}
+
+function cabecalhos() {
+  const headers = { 'Content-Type': 'application/json' };
+  const token = tokenAdmin();
+  if (token) headers.Authorization = 'Bearer ' + token;
+  return headers;
+}
+
+async function carregar() {
+  try {
+    const r = await fetch(API);
+    if (!r.ok) throw new Error();
+    produtos = await r.json();
+  } catch {
+    try {
+      produtos = await fetch('produtos.json').then(r => r.json());
+    } catch {
+      produtos = [];
+    }
+  }
+  render();
+}
+carregar();
 
 function render(){
  const lista=document.getElementById('lista');
@@ -58,29 +82,43 @@ function editar(i){
  window.scrollTo(0,0);
 }
 
-function salvarProduto(){
+async function salvarProduto(){
  const id=document.getElementById('edit-id').value;
  const novo={
-  id: id? produtos[id].id : Date.now(),
   name: document.getElementById('f-name').value,
   price: document.getElementById('f-price').value,
   image: document.getElementById('f-image').value,
   link: document.getElementById('f-link').value,
   description: document.getElementById('f-desc').value,
-  categoria: "mais-vendidos"
+  categoria: id!=="" ? (produtos[id].category || produtos[id].categoria || "mais-vendidos") : "mais-vendidos"
  };
- if(id!=="") produtos[id]=novo;
- else produtos.push(novo);
- render();
+ if (!tokenAdmin()) {
+  alert("Entre na loja com admin@rmx.store para salvar no servidor.");
+  return;
+ }
+ const url = id!=="" ? API + "/" + produtos[id].id : API;
+ const method = id!=="" ? "PUT" : "POST";
+ const r = await fetch(url, { method, headers: cabecalhos(), body: JSON.stringify(novo) });
+ if (!r.ok) {
+  alert("Não salvou no servidor.");
+  return;
+ }
  limparForm();
- alert("Salvo! Baixa o JSON e substitui na pasta config");
+ await carregar();
 }
 
-function remover(i){
- if(confirm("Apagar?")){
-  produtos.splice(i,1);
-  render();
+async function remover(i){
+ if(!confirm("Apagar?")) return;
+ if (!tokenAdmin()) {
+  alert("Entre na loja para apagar no servidor.");
+  return;
  }
+ const r = await fetch(API + "/" + produtos[i].id, { method: "DELETE", headers: cabecalhos() });
+ if (!r.ok) {
+  alert("Não apagou no servidor.");
+  return;
+ }
+ await carregar();
 }
 
 function limparForm(){

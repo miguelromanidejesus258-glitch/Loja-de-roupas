@@ -101,6 +101,13 @@ body {
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
+#login-msg {
+    min-height: 1.2em;
+    margin: 10px 0 0;
+    color: var(--cor-borda-dourada);
+    font-size: 14px;
+}
+
 /* Link de Cadastro */
 .signup-link {
     margin-top: 25px;
