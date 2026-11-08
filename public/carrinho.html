@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho | RMX Store</title>
+    <link rel="icon" type="image/x-icon" href="../ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo/favicon-16x16.png">
+    <link rel="stylesheet" href="../src/css/loja.css">
+    <link rel="stylesheet" href="../src/css/carrinho.css">
+    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="loja pagina-carrinho">
+    <header>
+        <h1><a href="loja.html">RMX Store</a></h1>
+                <div class="options">
+            <nav>
+                <ul>
+                    <li><a href="loja.html">Camisas</a></li>
+                    <li><a href="#short">Shorts</a></li>
+                    <li><a href="#calca">Calças</a></li>
+                    <li><a href="#Blusa">Blusas</a></li>
+                    <li><a href="#conjunto">Conjuntos</a></li>
+                    <li><a href="#promocao">Promoções</a></li>   
+                </ul>
+            </nav>
+        </div>
+        <div class="buttons-interact-header">
+            
+            <div class="search">
+                <input type="search" id="searchDigitado" placeholder="Digite algum Produto.">
+                <button class="button-search">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+            </div>
+        <a class="voltar" href="loja.html">Continuar comprando</a>
+    </header>
+
+    <main class="carrinho">
+        <h2 id="titulo-carrinho" tabindex="-1">Seu carrinho</h2>
+
+        <!-- Aparece quando não há nada no carrinho -->
+        <section id="carrinho-vazio" class="carrinho-vazio" hidden>
+            <p>Seu carrinho está vazio.</p>
+            <a class="botao-ouro" href="loja.html">Ver produtos</a>
+        </section>
+
+        <!-- Aparece quando há itens (a lista é desenhada pelo carrinho-pagina.js) -->
+        <div id="carrinho-conteudo" class="carrinho-grade" hidden>
+            <ul id="lista-carrinho" class="lista-carrinho"></ul>
+
+            <aside class="resumo" aria-labelledby="titulo-resumo">
+                <h3 id="titulo-resumo">Resumo do pedido</h3>
+                <p class="resumo-total">
+                    <span>Total</span>
+                    <strong id="total-carrinho" aria-live="polite">R$ 0,00</strong>
+                </p>
+
+                <p id="aviso-tamanho" class="aviso" tabindex="-1" role="alert" hidden>
+                    Escolha o tamanho de todos os itens para finalizar.
+                </p>
+
+                <a id="btn-whatsapp" class="botao-ouro" href="#" target="_blank" rel="noopener noreferrer" hidden>
+                    Finalizar pelo WhatsApp
+                </a>
+                <a id="btn-instagram" class="botao-borda" href="#" target="_blank" rel="noopener noreferrer" hidden>
+                    Finalizar pelo Instagram
+                </a>
+                <p id="status-finalizar" class="status" role="status"></p>
+
+                <p class="resumo-nota">
+                    Você envia o pedido pela conversa e a loja confirma o valor do frete e a forma de pagamento.
+                </p>
+                <button id="btn-limpar" class="link-botao" type="button">Esvaziar carrinho</button>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-informations">
+            <p>desenvolvido com <ion-icon name="heart-outline"></ion-icon> Por Miguel Romani</p>
+            <p>Todos os direitos reservados</p>
+            <p>₢ 2026</p>
+        </div>
+        <div class="footer-social">
+            <p>Tem alguma duvida?<br>Fale conosco!</p>
+            <p>Nossos meios de comunicação:</p>
+            <div class="footer-redes-sociais">
+                <a href="http://instagram.com/rm_store_011/" target="_blank">
+                    <button id="instagram-footer">
+                        <ion-icon name="logo-instagram"></ion-icon>   
+                    </button>
+                </a>
+                <!--http://wa.me/5511951619314 - whatsapp-->
+                <a href="http://wa.me/" target="_blank" rel="noopener noreferrer">
+                    <button id="whatsapp-footer">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                    </button>
+                </a>
+                <button id="tiktok-footer">
+                    <ion-icon name="logo-tiktok"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../src/js/config.js"></script>
+    <script src="../src/js/carrinho.js"></script>
+    <script src="../src/js/carrinho-pagina.js"></script>
+</body>
+</html>

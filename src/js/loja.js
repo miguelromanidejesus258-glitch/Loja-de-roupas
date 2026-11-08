@@ -7,12 +7,24 @@ const JSON_PATH = './produtos.json';
 // Páginas ficam em public/, as fotos ficam em assets/ na raiz do projeto
 const CAMINHO_IMAGENS = '../assets/';
 
-function showCartAdded(name) {
+// Aviso rápido no canto da tela. textContent trata o texto como TEXTO (seguro).
+function showToast(texto, comLink = false) {
   const toast = document.createElement('div');
   toast.className = 'toast-notification show';
-  toast.textContent = `✅ ${name || 'Produto'} adicionado`;
+  toast.setAttribute('role', 'status');
+  toast.textContent = texto;
+  if (comLink) {
+    const link = document.createElement('a');
+    link.href = 'carrinho.html';
+    link.textContent = 'Ver carrinho';
+    toast.append(link);
+  }
   document.body.appendChild(toast);
-  setTimeout(() => { toast.remove(); }, 3000);
+  setTimeout(() => { toast.remove(); }, comLink ? 4500 : 3000);
+}
+
+function showCartAdded(name) {
+  showToast(`✅ ${name || 'Produto'} adicionado`, true);
 }
 
 function imagemValida(caminho) {
@@ -156,20 +168,23 @@ function ativarBotoes() {
     }
   });
 
+  // Ícone do carrinho em cada card: guarda no carrinho (localStorage).
   document.querySelectorAll('.card .cart').forEach(btn => {
     btn.onclick = () => {
-      const card = btn.closest('.card');
-      showCartAdded(card.dataset.name);
-      const token = localStorage.getItem('rmx_token');
-      if (!token || !card.dataset.id) return;
-      fetch('/api/carrinho', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token
-        },
-        body: JSON.stringify({ product_id: Number(card.dataset.id), quantidade: 1 })
-      }).catch(() => {});
+      const produto = Carrinho.lerCard(btn.closest('.card'));
+      if (Carrinho.adicionar(produto)) showCartAdded(produto.nome);
+      else showToast('⚠️ Não foi possível adicionar este produto');
+    };
+  });
+
+  // "Compre Agora": adiciona ao carrinho e já abre o carrinho para finalizar.
+  // preventDefault evita o pulo para o topo que o <a href="#"> antigo causava.
+  document.querySelectorAll('.btn-compraragora').forEach(btn => {
+    btn.onclick = e => {
+      e.preventDefault();
+      const produto = Carrinho.lerCard(btn.closest('.card'));
+      if (Carrinho.adicionar(produto)) window.location.href = 'carrinho.html';
+      else showToast('⚠️ Não foi possível comprar este produto');
     };
   });
 
@@ -187,6 +202,48 @@ function ativarBotoes() {
       window.location.href = 'descricao.html';
     };
   });
+
+  ativarDescricao();
+}
+
+// Só faz algo na página descricao.html: escolher tamanho, adicionar e comprar agora.
+function ativarDescricao() {
+  const btnAdd = document.getElementById('btn-add-carrinho-desc');
+  const btnCompre = document.querySelector('.buttons-details .btn-compre-agora');
+  if (!btnAdd && !btnCompre) return;
+
+  let tamanho = '';
+  const botoesTamanho = document.querySelectorAll('.size-options button');
+  botoesTamanho.forEach(botao => {
+    botao.type = 'button';
+    botao.setAttribute('aria-pressed', 'false');
+    botao.onclick = () => {
+      tamanho = botao.textContent.trim();
+      botoesTamanho.forEach(outro => outro.setAttribute('aria-pressed', String(outro === botao)));
+    };
+  });
+
+  // Junta o produto clicado na loja (sessionStorage) com o tamanho escolhido.
+  function produtoAtual() {
+    let p = null;
+    try { p = JSON.parse(sessionStorage.getItem('productDetails')); } catch (e) { /* vazio */ }
+    if (!p || !p.name) { showToast('Escolha um produto na loja primeiro'); return null; }
+    if (!tamanho) { showToast('Escolha um tamanho: P, M, G ou GG'); return null; }
+    return { nome: p.name, preco: p.price, imagem: p.image, tamanho };
+  }
+
+  if (btnAdd) {
+    btnAdd.onclick = () => {
+      const produto = produtoAtual();
+      if (produto && Carrinho.adicionar(produto)) showCartAdded(produto.nome);
+    };
+  }
+  if (btnCompre) {
+    btnCompre.onclick = () => {
+      const produto = produtoAtual();
+      if (produto && Carrinho.adicionar(produto)) window.location.href = 'carrinho.html';
+    };
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -217,12 +274,12 @@ function prt(){
   const container = document.querySelector('.pergunta');
   if(container) container.appendChild(div);
   input.value = "";
-  showCartAdded("Pergunta enviada");
+  showToast('✅ Pergunta enviada');
 }
 
-function compraragora() {
-  alert('Função comprar agora!');
-}
+// Mantida só porque alguns botões do HTML ainda têm onclick="compraragora()".
+// Quem faz o trabalho é o ativarBotoes(), que troca esse onclick.
+function compraragora() {}
 
 function adicionarCard(novoProduto) {
   const produtos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
