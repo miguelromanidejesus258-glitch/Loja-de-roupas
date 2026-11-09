@@ -19,6 +19,14 @@ def gerar_token_seguro() -> str:
     return secrets.token_urlsafe(32)
 
 
+def _normalizar_data(data: datetime | None) -> datetime | None:
+    if data is None:
+        return None
+    if data.tzinfo is None:
+        return data.replace(tzinfo=timezone.utc)
+    return data.astimezone(timezone.utc)
+
+
 def criar_sessao_para_usuario(db: Session, usuario: Usuario, ttl_horas: int = 12) -> str:
     token = gerar_token_seguro()
     expiracao = datetime.now(timezone.utc) + timedelta(hours=ttl_horas)
@@ -62,10 +70,25 @@ def usuario_logado(
         raise HTTPException(status_code=401, detail="Token inválido")
 
     sessao = db.query(SessaoUsuario).filter(SessaoUsuario.token == token).first()
-    if not sessao or sessao.revogado or sessao.expira_em <= datetime.now(timezone.utc):
-        if sessao:
-            sessao.revogado = True
-            db.commit()
+    if not sessao:
+        usuario_legacy = db.query(Usuario).filter(Usuario.token == token).first()
+        if not usuario_legacy or not usuario_legacy.ativo:
+            raise HTTPException(status_code=401, detail="Sessão inválida ou expirada")
+        validade = _normalizar_data(usuario_legacy.ultima_atividade)
+        agora = datetime.now(timezone.utc)
+        if validade is None or validade < agora - timedelta(hours=12):
+            raise HTTPException(status_code=401, detail="Sessão inválida ou expirada")
+        usuario_legacy.ultima_atividade = agora
+        db.commit()
+        return usuario_legacy
+
+    if sessao.revogado:
+        raise HTTPException(status_code=401, detail="Sessão inválida ou expirada")
+
+    expira_em = _normalizar_data(sessao.expira_em)
+    if expira_em is None or expira_em <= datetime.now(timezone.utc):
+        sessao.revogado = True
+        db.commit()
         raise HTTPException(status_code=401, detail="Sessão inválida ou expirada")
 
     usuario = db.get(Usuario, sessao.usuario_id)

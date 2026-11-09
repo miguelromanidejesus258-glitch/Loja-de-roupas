@@ -265,7 +265,6 @@ def login_google(dados: GoogleLoginEntrada, db: Session = Depends(get_db)):
 
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
     if not usuario:
-if not usuario:
         usuario = Usuario(
             nome=(info.get("name") or info.get("given_name") or "Usuário Google").strip()[:120],
             email=email,
@@ -288,7 +287,7 @@ if not usuario:
 
     token = criar_sessao_para_usuario(db, usuario)
     db.refresh(usuario)
-    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token)
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token, role=usuario.role or "user")
 
 
 @app.post("/api/auth/registrar", response_model=UsuarioSaida)
@@ -308,7 +307,7 @@ def registrar(dados: CadastroEntrada, db: Session = Depends(get_db)):
     db.refresh(usuario)
     token = criar_sessao_para_usuario(db, usuario)
     db.refresh(usuario)
-    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token)
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token, role=usuario.role or "user")
 
 
 @app.post("/api/auth/login", response_model=UsuarioSaida)
@@ -322,12 +321,12 @@ def login(dados: LoginEntrada, db: Session = Depends(get_db)):
     usuario.role = "admin" if email == "admin@rmx.store" else (usuario.role or "user")
     token = criar_sessao_para_usuario(db, usuario)
     db.refresh(usuario)
-    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token)
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token, role=usuario.role or "user")
 
 
 @app.get("/api/auth/me", response_model=UsuarioSaida)
 def me(usuario: Usuario = Depends(usuario_logado)):
-    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=usuario.token or "")
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=usuario.token, role=usuario.role or "user")
 
 
 @app.get("/api/carrinho", response_model=list[ItemCarrinhoSaida])

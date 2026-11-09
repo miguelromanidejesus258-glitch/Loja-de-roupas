@@ -108,6 +108,33 @@
   </div>
 
   <script>
+    (function verificarAdmin() {
+      const token = localStorage.getItem('rmx_token');
+      const role = (localStorage.getItem('rmx_role') || '').toLowerCase();
+      if (!token) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (role === 'admin') return;
+
+      fetch('http://127.0.0.1:8000/api/auth/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(async (resposta) => {
+        if (!resposta.ok) throw new Error('Sem autorização');
+        const dados = await resposta.json();
+        const papel = (dados.role || 'user').toLowerCase();
+        localStorage.setItem('rmx_role', papel);
+        if (papel !== 'admin') {
+          window.location.href = 'loja.html';
+        }
+      }).catch(() => {
+        localStorage.removeItem('rmx_token');
+        localStorage.removeItem('rmx_role');
+        window.location.href = 'login.html';
+      });
+    })();
+
     const API = '/api/produtos';
     const estado = {
       produtos: [],

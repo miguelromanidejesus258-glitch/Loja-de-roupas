@@ -17,8 +17,15 @@ function mostrarMensagem(texto) {
 }
 
 function salvarSessao(dados, email) {
+  const nome = dados.nome || email || 'Usuário';
+  const papel = (dados.role || (email === 'admin@rmx.store' ? 'admin' : 'user')).toLowerCase();
+  const avatar = dados.imagem_url || dados.avatar_url || '';
+
   localStorage.setItem('rmx_token', dados.token);
-  localStorage.setItem('rmx_usuario', dados.nome || email);
+  localStorage.setItem('rmx_usuario', nome);
+  localStorage.setItem('rmx_email', email || '');
+  localStorage.setItem('rmx_role', papel);
+  if (avatar) localStorage.setItem('rmx_avatar', avatar);
   window.location.href = 'loja.html';
 }
 

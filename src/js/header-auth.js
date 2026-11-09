@@ -3,7 +3,8 @@
     const nome = localStorage.getItem('rmx_usuario') || '';
     const token = localStorage.getItem('rmx_token') || '';
     const avatar = localStorage.getItem('rmx_avatar') || '';
-    return { nome, token, avatar };
+    const role = localStorage.getItem('rmx_role') || 'user';
+    return { nome, token, avatar, role };
   }
 
   function inicializarAvatarInicial(nome) {
@@ -17,7 +18,7 @@
     const container = document.getElementById('header-auth');
     if (!container) return;
 
-    const { nome, token, avatar } = pegarUsuario();
+    const { nome, token, avatar, role } = pegarUsuario();
     const logado = Boolean(token && nome);
 
     if (!logado) {
@@ -32,11 +33,13 @@
 
     const nomeExibicao = nome.trim();
     const avatarUrl = avatar && avatar.trim() ? avatar.trim() : '';
+    const eAdmin = role === 'admin';
 
     container.innerHTML = `
       <div class="user-pill" aria-label="Usuário autenticado">
         ${avatarUrl ? `<img src="${avatarUrl}" alt="Foto de ${nomeExibicao}" class="user-avatar-image">` : `<span class="user-avatar-circle">${inicializarAvatarInicial(nomeExibicao)}</span>`}
         <span class="user-name">${nomeExibicao}</span>
+        ${eAdmin ? `<a class="user-admin-link" href="admin.html">Admin</a>` : ''}
         <button class="user-logout" type="button">Sair</button>
       </div>
     `;

@@ -46,6 +46,7 @@ class UsuarioSaida(BaseModel):
     nome: str
     email: str
     token: str
+    role: str = "user"
 
 
 class ItemCarrinhoEntrada(BaseModel):
