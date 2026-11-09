@@ -11,35 +11,66 @@
     <link rel="stylesheet" href="../src/css/login.css">
 </head>
 <body>
-    <div class="login-container">
-        <!-- Placeholder para a logo RMX -->
-        <div class="logo-placeholder">
-            <img src="../assets/logo/android-chrome-512x512.png" alt="Foto da logo da rmx store">
-        </div>
+    <div class="page-shell">
+        <div class="bg-glow glow-one"></div>
+        <div class="bg-glow glow-two"></div>
 
-        <div class="input-group" id="grupo-nome" hidden>
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome">
-        </div>
-        <div class="input-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
-        </div>
-        <div class="input-group">
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password" placeholder="********">
-        </div>
-        <p id="login-msg"></p>
-        <button class="login-button" id="btn-login" type="button">Entrar</button>
+        <main class="login-card" aria-label="Área de login da RMX Store">
+            <div class="brand-wrap">
+                <div class="brand-mark">
+                    <img src="../assets/logo/android-chrome-512x512.png" alt="Logo RMX Store">
+                </div>
+                <div class="brand-text">
+                    <span class="eyebrow">Bem-vindo</span>
+                    <h1>RMX Store</h1>
+                </div>
+            </div>
 
-        <div class="divider"><span>ou</span></div>
-        <button class="google-button" id="btn-google" type="button" disabled>
-            Continuar com Google
-        </button>
+            <div class="form-header">
+                <p class="subtitle">Acesse sua conta para continuar</p>
+            </div>
 
-        <div class="signup-link">
-            Não tem conta? <a href="#" id="link-cadastro">Cadastre-se</a>
-        </div>
+            <form class="login-form" novalidate>
+                <div class="input-group" id="grupo-nome" hidden>
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Seu nome completo">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••">
+                </div>
+
+                <div class="form-row">
+                    <label class="remember-box">
+                        <input type="checkbox" checked>
+                        <span>Lembrar-me</span>
+                    </label>
+                    <a href="#" class="link-muted">Esqueci a senha</a>
+                </div>
+
+                <p id="login-msg" aria-live="polite"></p>
+
+                <button class="login-button" id="btn-login" type="button">Entrar</button>
+
+                <div class="divider"><span>ou</span></div>
+
+                <button class="google-button" id="btn-google" type="button" disabled>
+                    <span class="g-icon">G</span>
+                    Continuar com Google
+                </button>
+            </form>
+
+            <div class="signup-link">
+                <span>Não tem conta?</span>
+                <a href="#" id="link-cadastro">Cadastre-se</a>
+            </div>
+        </main>
     </div>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>

@@ -103,6 +103,101 @@ header .config-header:hover{
     transform: translateY(-3px);
 }
 
+#header-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+#header-auth .auth-actions,
+#header-auth .user-pill {
+    display: inline-flex;
+    align-items: center;
+}
+
+.auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.auth-button:hover {
+    transform: translateY(-2px);
+}
+
+.auth-button-light {
+    background: rgba(255,255,255,0.08);
+    color: var(--branco);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+.auth-button-gold {
+    background: linear-gradient(135deg, var(--dourado), #e9c76d);
+    color: #111;
+    box-shadow: 0 10px 20px rgba(201, 162, 39, 0.25);
+}
+
+.user-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px 6px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+.user-avatar-image,
+.user-avatar-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--dourado), #f2d480);
+    color: #111;
+    font-weight: 700;
+    font-size: 0.8rem;
+    object-fit: cover;
+}
+
+.user-name {
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.84rem;
+    color: var(--branco);
+}
+
+.user-logout {
+    border: none;
+    background: transparent;
+    color: var(--dourado);
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.user-logout:hover {
+    text-decoration: underline;
+}
+
 .interact-bottom{
     display: flex;
     justify-content: space-between;

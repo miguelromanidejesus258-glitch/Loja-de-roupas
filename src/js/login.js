@@ -3,7 +3,14 @@ const grupoNome = document.getElementById('grupo-nome');
 const botao = document.getElementById('btn-login');
 const botaoGoogle = document.getElementById('btn-google');
 const link = document.getElementById('link-cadastro');
+const isLocalFile = window.location.protocol === 'file:';
+const isBackendSameOrigin = window.location.hostname === '127.0.0.1' && window.location.port === '8000';
+const API_BASE = isLocalFile || isBackendSameOrigin ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
 let modoCadastro = false;
+
+function apiUrl(path) {
+  return `${API_BASE}${path}`;
+}
 
 function mostrarMensagem(texto) {
   if (msg) msg.textContent = texto;
@@ -30,7 +37,7 @@ async function autenticarLocal(email, senha, nome = '') {
   botao.disabled = true;
 
   try {
-    const resposta = await fetch(caminho, {
+    const resposta = await fetch(apiUrl(caminho), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(corpo)
@@ -42,7 +49,7 @@ async function autenticarLocal(email, senha, nome = '') {
     }
     salvarSessao(dados, email);
   } catch (erro) {
-    mostrarMensagem('Servidor desligado. Rode a API e tente de novo.');
+    mostrarMensagem('API indisponível. Inicie o backend em http://127.0.0.1:8000 e tente novamente.');
   } finally {
     botao.disabled = false;
   }
@@ -58,7 +65,7 @@ async function autenticarGoogle(credential) {
   mostrarMensagem('Entrando com Google...');
 
   try {
-    const resposta = await fetch('/api/auth/google', {
+    const resposta = await fetch(apiUrl('/api/auth/google'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ credential })
@@ -78,7 +85,7 @@ async function autenticarGoogle(credential) {
 
 async function inicializarGoogle() {
   try {
-    const resposta = await fetch('/api/auth/google/client-id');
+    const resposta = await fetch(apiUrl('/api/auth/google/client-id'));
     const dados = await resposta.json().catch(() => ({}));
     const clientId = dados.client_id || '';
 
