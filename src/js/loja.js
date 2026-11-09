@@ -88,8 +88,13 @@ function criarHTMLCard(p) {
   const imagem = corrigirCaminhoImagem(p.imagem || p.image);
   const nome = p.nome || p.name || 'Produto sem nome';
   const preco = p.preco || p.price || '0,00';
+  const precoAntigo = p.preco_antigo || p.precoAntigo || '';
+  const desconto = p.desconto || p.discount || '';
 
   const src = imagem ? `src="${imagem}"` : '';
+  const antigo = precoAntigo ? `<span class="preco-antigo">${precoAntigo}</span>` : '';
+  const badge = desconto ? `<span class="badge-desconto">${desconto}</span>` : '';
+
   return `
     <img 
       ${src}
@@ -98,7 +103,11 @@ function criarHTMLCard(p) {
     >
     <h4>${nome}</h4>
     <div class="informations-card">
-        <p class="preco-card">${preco}</p>
+        <div class="precos-card">
+          ${antigo}
+          <p class="preco-card">${preco}</p>
+          ${badge}
+        </div>
         <div class="interact">
             <button class="cart"><ion-icon name="cart-outline"></ion-icon></button>
             <button class="heart"><ion-icon name="heart-outline"></ion-icon></button>

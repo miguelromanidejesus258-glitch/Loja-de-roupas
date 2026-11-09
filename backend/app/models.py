@@ -27,6 +27,8 @@ class Produto(Base):
     link: Mapped[str] = mapped_column(String(200), default="descricao.html")
     description: Mapped[str] = mapped_column(String(2000), default="")
     category: Mapped[str] = mapped_column(String(60), default="mais-vendidos")
+    preco_antigo: Mapped[str | None] = mapped_column(String(40), nullable=True, default="")
+    desconto: Mapped[str | None] = mapped_column(String(20), nullable=True, default="")
 
 
 class ItemCarrinho(Base):

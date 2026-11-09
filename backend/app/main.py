@@ -66,11 +66,31 @@ def garantir_colunas_usuarios(db: Session) -> None:
     db.commit()
 
 
+def garantir_colunas_produtos(db: Session) -> None:
+    try:
+        colunas = db.execute(text("PRAGMA table_info(produtos)")).fetchall()
+    except Exception:
+        return
+
+    nomes = {coluna[1] for coluna in colunas}
+    alteracoes = {
+        "preco_antigo": "ALTER TABLE produtos ADD COLUMN preco_antigo VARCHAR(40)",
+        "desconto": "ALTER TABLE produtos ADD COLUMN desconto VARCHAR(20)",
+    }
+
+    for nome, comando in alteracoes.items():
+        if nome not in nomes:
+            db.execute(text(comando))
+
+    db.commit()
+
+
 @asynccontextmanager
 async def vida_da_api(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     with Session(engine) as db:
         garantir_colunas_usuarios(db)
+        garantir_colunas_produtos(db)
         popular_banco(db)
     yield
 
@@ -85,6 +105,7 @@ app.add_middleware(
 
 
 def produto_publico(produto: Produto) -> ProdutoSaida:
+    categoria = (produto.category or "mais-vendidos").strip() or "mais-vendidos"
     return ProdutoSaida(
         id=produto.id,
         name=produto.name,
@@ -92,8 +113,10 @@ def produto_publico(produto: Produto) -> ProdutoSaida:
         image=produto.image,
         link=produto.link,
         description=produto.description,
-        category=produto.category,
-        categoria=produto.category,
+        category=categoria,
+        categoria=categoria,
+        preco_antigo=produto.preco_antigo or "",
+        desconto=produto.desconto or "",
     )
 
 
@@ -104,6 +127,8 @@ def aplicar_produto(produto: Produto, dados: ProdutoEntrada) -> None:
     produto.link = (dados.link or "descricao.html").strip()
     produto.description = dados.description.strip()
     produto.category = (dados.category or dados.categoria or "mais-vendidos").strip()
+    produto.preco_antigo = (dados.preco_antigo or "").strip()
+    produto.desconto = (dados.desconto or "").strip()
 
 
 @app.get("/api/produtos", response_model=list[ProdutoSaida])

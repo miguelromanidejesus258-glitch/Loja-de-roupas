@@ -434,6 +434,31 @@ main a:hover{
     font-size: 23px;
 }
 
+.precos-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.preco-antigo {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 0.75rem;
+}
+
+.badge-desconto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(201, 162, 39, 0.14);
+    color: var(--dourado);
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
 .informations-card{
     display: flex;
     flex-direction: row;

@@ -1,143 +1,358 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <title>ADM - RMX Store</title>
-    <link rel="stylesheet" href="../src/css/admin.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin RMX Store</title>
+  <link rel="stylesheet" href="../src/css/admin.css" />
 </head>
 <body>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">RMX</div>
+        <div>
+          <p>Admin</p>
+          <strong>RMX Store</strong>
+        </div>
+      </div>
 
-<h1>PAINEL ADM - RMX STORE</h1>
+      <nav class="nav-links">
+        <a href="#" class="active">Produtos</a>
+        <a href="#" onclick="return false;">Categorias</a>
+        <a href="loja.html">Ver loja</a>
+      </nav>
+    </aside>
 
-<div class="form-add">
-    <h3>Adicionar / Editar Produto</h3>
-    <input id="edit-id" type="hidden">
-    <input id="f-name" placeholder="Nome">
-    <input id="f-price" placeholder="Preço ex: 90,99R$">
-    <input id="f-image" placeholder="Caminho da imagem">
-    <input id="f-link" placeholder="Link de venda">
-    <textarea id="f-desc" placeholder="Descrição"></textarea>
-    <button class="btn-add" onclick="salvarProduto()">Salvar Produto</button>
-    <button onclick="limparForm()">Cancelar</button>
-    <button onclick="exportarJSON()" style="background:yellow; color:black">⬇️ Baixar produtos.json</button>
-</div>
+    <main class="admin-main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Painel</p>
+          <h1>Gerenciar catálogo</h1>
+        </div>
+        <button class="secondary" id="btn-exportar">Exportar JSON</button>
+      </header>
 
-<div class="grid" id="lista"></div>
+      <section class="panel form-panel">
+        <div class="form-header">
+          <h2>Adicionar ou editar produto</h2>
+          <p>Use o formulário para criar, atualizar e organizar o catálogo.</p>
+        </div>
 
-<script>
-let produtos = [];
-const API = '/api/produtos';
+        <input id="edit-id" type="hidden" />
 
-function tokenAdmin() {
-  return localStorage.getItem('rmx_token') || '';
-}
+        <div class="form-grid">
+          <label>
+            Nome do produto
+            <input id="f-name" type="text" placeholder="Ex: Camisa premium preta" />
+          </label>
 
-function cabecalhos() {
-  const headers = { 'Content-Type': 'application/json' };
-  const token = tokenAdmin();
-  if (token) headers.Authorization = 'Bearer ' + token;
-  return headers;
-}
+          <label>
+            Categoria
+            <select id="f-category"></select>
+          </label>
 
-async function carregar() {
-  try {
-    const r = await fetch(API);
-    if (!r.ok) throw new Error();
-    produtos = await r.json();
-  } catch {
-    try {
-      produtos = await fetch('produtos.json').then(r => r.json());
-    } catch {
-      produtos = [];
+          <label>
+            Preço atual
+            <input id="f-price" type="text" placeholder="Ex: 89,90R$" />
+          </label>
+
+          <label>
+            Preço antigo
+            <input id="f-preco-antigo" type="text" placeholder="Ex: 129,90R$" />
+          </label>
+
+          <label>
+            Desconto
+            <input id="f-desconto" type="text" placeholder="Ex: 31% OFF" />
+          </label>
+
+          <label>
+            URL da imagem
+            <input id="f-image" type="text" placeholder="https://.../imagem.png" />
+          </label>
+
+          <label>
+            Link da página
+            <input id="f-link" type="text" placeholder="descricao.html" />
+          </label>
+
+          <label class="full-width">
+            Descrição
+            <textarea id="f-desc" rows="5" placeholder="Descreva o produto, material, estilo, tamanho e detalhes."></textarea>
+          </label>
+        </div>
+
+        <div class="category-box">
+          <div class="category-row">
+            <input id="nova-categoria" type="text" placeholder="Adicionar nova categoria" />
+            <button class="primary" id="btn-add-categoria">Adicionar categoria</button>
+          </div>
+          <div id="categoria-tags" class="category-tags"></div>
+        </div>
+
+        <div class="action-row">
+          <button class="primary" id="btn-salvar">Salvar produto</button>
+          <button class="ghost" id="btn-limpar">Cancelar</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="list-header">
+          <h2>Produtos cadastrados</h2>
+          <span id="contador-produtos">0 itens</span>
+        </div>
+        <div class="grid" id="lista"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const API = '/api/produtos';
+    const estado = {
+      produtos: [],
+      categorias: ['mais-vendidos', 'camisas', 'shorts', 'calcas', 'blusas', 'conjuntos', 'promocao']
+    };
+
+    const form = {
+      id: document.getElementById('edit-id'),
+      nome: document.getElementById('f-name'),
+      categoria: document.getElementById('f-category'),
+      preco: document.getElementById('f-price'),
+      precoAntigo: document.getElementById('f-preco-antigo'),
+      desconto: document.getElementById('f-desconto'),
+      image: document.getElementById('f-image'),
+      link: document.getElementById('f-link'),
+      desc: document.getElementById('f-desc'),
+      novaCategoria: document.getElementById('nova-categoria')
+    };
+
+    function tokenAdmin() {
+      return localStorage.getItem('rmx_token') || '';
     }
-  }
-  render();
-}
-carregar();
 
-function render(){
- const lista=document.getElementById('lista');
- lista.innerHTML='';
- produtos.forEach((p,i)=>{
-  lista.innerHTML+=`
-  <div class="card-admin">
-   <img src="${p.image}">
-   <h4>${p.name}</h4>
-   <p>${p.price}</p>
-   <p style="font-size:12px; opacity:0.7">${p.description?.substring(0,80)}</p>
-   <button class="btn-save" onclick="editar(${i})">Editar</button>
-   <button class="btn-del" onclick="remover(${i})">Apagar</button>
-  </div>`;
- });
-}
+    function cabecalhos() {
+      const headers = { 'Content-Type': 'application/json' };
+      const token = tokenAdmin();
+      if (token) headers.Authorization = 'Bearer ' + token;
+      return headers;
+    }
 
-function editar(i){
- const p=produtos[i];
- document.getElementById('edit-id').value=i;
- document.getElementById('f-name').value=p.name;
- document.getElementById('f-price').value=p.price;
- document.getElementById('f-image').value=p.image;
- document.getElementById('f-link').value=p.link;
- document.getElementById('f-desc').value=p.description;
- window.scrollTo(0,0);
-}
+    function extrairCategorias(produtos) {
+      const categorias = new Set(['mais-vendidos', 'camisas', 'shorts', 'calcas', 'blusas', 'conjuntos', 'promocao']);
+      produtos.forEach((produto) => {
+        const categoria = (produto.category || produto.categoria || 'mais-vendidos').trim();
+        if (categoria) categorias.add(categoria.toLowerCase());
+      });
+      return [...categorias];
+    }
 
-async function salvarProduto(){
- const id=document.getElementById('edit-id').value;
- const novo={
-  name: document.getElementById('f-name').value,
-  price: document.getElementById('f-price').value,
-  image: document.getElementById('f-image').value,
-  link: document.getElementById('f-link').value,
-  description: document.getElementById('f-desc').value,
-  categoria: id!=="" ? (produtos[id].category || produtos[id].categoria || "mais-vendidos") : "mais-vendidos"
- };
- if (!tokenAdmin()) {
-  alert("Entre na loja com admin@rmx.store para salvar no servidor.");
-  return;
- }
- const url = id!=="" ? API + "/" + produtos[id].id : API;
- const method = id!=="" ? "PUT" : "POST";
- const r = await fetch(url, { method, headers: cabecalhos(), body: JSON.stringify(novo) });
- if (!r.ok) {
-  alert("Não salvou no servidor.");
-  return;
- }
- limparForm();
- await carregar();
-}
+    function preencherCategorias() {
+      const atual = form.categoria.value || 'mais-vendidos';
+      form.categoria.innerHTML = '';
+      estado.categorias.forEach((categoria) => {
+        const option = document.createElement('option');
+        option.value = categoria;
+        option.textContent = categoria;
+        if (categoria === atual) option.selected = true;
+        form.categoria.appendChild(option);
+      });
+    }
 
-async function remover(i){
- if(!confirm("Apagar?")) return;
- if (!tokenAdmin()) {
-  alert("Entre na loja para apagar no servidor.");
-  return;
- }
- const r = await fetch(API + "/" + produtos[i].id, { method: "DELETE", headers: cabecalhos() });
- if (!r.ok) {
-  alert("Não apagou no servidor.");
-  return;
- }
- await carregar();
-}
+    function renderTagsCategorias() {
+      const container = document.getElementById('categoria-tags');
+      container.innerHTML = '';
+      estado.categorias.forEach((categoria) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'category-tag';
+        chip.textContent = categoria;
+        chip.addEventListener('click', () => {
+          form.categoria.value = categoria;
+          form.novaCategoria.value = categoria;
+        });
+        container.appendChild(chip);
+      });
+    }
 
-function limparForm(){
- document.getElementById('edit-id').value="";
- document.getElementById('f-name').value="";
- document.getElementById('f-price').value="";
- document.getElementById('f-image').value="";
- document.getElementById('f-link').value="";
- document.getElementById('f-desc').value="";
-}
+    async function carregarProdutos() {
+      try {
+        const resposta = await fetch(API, { headers: cabecalhos() });
+        if (!resposta.ok) throw new Error('Erro ao carregar');
+        estado.produtos = await resposta.json();
+      } catch (erro) {
+        estado.produtos = [];
+      }
 
-function exportarJSON(){
- const blob=new Blob([JSON.stringify(produtos, null, 2)], {type:'application/json'});
- const a=document.createElement('a');
- a.href=URL.createObjectURL(blob);
- a.download='produtos.json';
- a.click();
-}
-</script>
+      estado.categorias = extrairCategorias(estado.produtos);
+      preencherCategorias();
+      renderTagsCategorias();
+      renderLista();
+    }
 
+    function renderLista() {
+      const lista = document.getElementById('lista');
+      const contador = document.getElementById('contador-produtos');
+      contador.textContent = `${estado.produtos.length} itens`;
+      lista.innerHTML = '';
+
+      estado.produtos.forEach((produto, index) => {
+        const card = document.createElement('article');
+        card.className = 'card-admin';
+        const imagem = produto.image || 'https://via.placeholder.com/320x320?text=Produto';
+        const categoria = produto.category || produto.categoria || 'mais-vendidos';
+        const desconto = produto.desconto || '';
+        const precoAntigo = produto.preco_antigo || '';
+
+        card.innerHTML = `
+          <img src="${imagem}" alt="${produto.name}" />
+          <span class="categoria-badge">${categoria}</span>
+          <h3>${produto.name}</h3>
+          <div class="precos">
+            ${precoAntigo ? `<span class="preco-antigo">${precoAntigo}</span>` : ''}
+            <strong>${produto.price}</strong>
+            ${desconto ? `<span class="desconto">${desconto}</span>` : ''}
+          </div>
+          <p>${(produto.description || '').substring(0, 90)}${(produto.description || '').length > 90 ? '...' : ''}</p>
+          <div class="card-actions">
+            <button class="secondary" type="button" data-index="${index}" data-action="editar">Editar</button>
+            <button class="danger" type="button" data-index="${index}" data-action="remover">Excluir</button>
+          </div>
+        `;
+
+        lista.appendChild(card);
+      });
+
+      document.querySelectorAll('[data-action="editar"]').forEach((botao) => {
+        botao.addEventListener('click', () => editarProduto(Number(botao.dataset.index)));
+      });
+
+      document.querySelectorAll('[data-action="remover"]').forEach((botao) => {
+        botao.addEventListener('click', () => removerProduto(Number(botao.dataset.index)));
+      });
+    }
+
+    function limparFormulario() {
+      form.id.value = '';
+      form.nome.value = '';
+      form.preco.value = '';
+      form.precoAntigo.value = '';
+      form.desconto.value = '';
+      form.image.value = '';
+      form.link.value = 'descricao.html';
+      form.desc.value = '';
+      form.novaCategoria.value = '';
+      form.categoria.value = estado.categorias[0] || 'mais-vendidos';
+    }
+
+    function editarProduto(index) {
+      const produto = estado.produtos[index];
+      if (!produto) return;
+      form.id.value = produto.id;
+      form.nome.value = produto.name;
+      form.preco.value = produto.price;
+      form.precoAntigo.value = produto.preco_antigo || '';
+      form.desconto.value = produto.desconto || '';
+      form.image.value = produto.image || '';
+      form.link.value = produto.link || 'descricao.html';
+      form.desc.value = produto.description || '';
+      form.categoria.value = produto.category || produto.categoria || 'mais-vendidos';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function salvarProduto() {
+      const dados = {
+        name: form.nome.value.trim(),
+        price: form.preco.value.trim(),
+        image: form.image.value.trim(),
+        link: form.link.value.trim() || 'descricao.html',
+        description: form.desc.value.trim(),
+        category: form.categoria.value.trim(),
+        categoria: form.categoria.value.trim(),
+        preco_antigo: form.precoAntigo.value.trim(),
+        desconto: form.desconto.value.trim()
+      };
+
+      if (!dados.name || !dados.price) {
+        alert('Informe pelo menos nome e preço do produto.');
+        return;
+      }
+
+      const token = tokenAdmin();
+      if (!token) {
+        alert('Faça login primeiro com a conta admin para salvar os produtos.');
+        return;
+      }
+
+      const produtoId = form.id.value;
+      const metodo = produtoId ? 'PUT' : 'POST';
+      const url = produtoId ? `${API}/${produtoId}` : API;
+
+      const resposta = await fetch(url, {
+        method: metodo,
+        headers: cabecalhos(),
+        body: JSON.stringify(dados)
+      });
+
+      if (!resposta.ok) {
+        const erro = await resposta.text();
+        alert('Não foi possível salvar o produto.\n' + erro);
+        return;
+      }
+
+      limparFormulario();
+      await carregarProdutos();
+    }
+
+    async function removerProduto(index) {
+      const produto = estado.produtos[index];
+      if (!produto) return;
+      if (!confirm(`Deseja remover "${produto.name}"?`)) return;
+
+      const resposta = await fetch(`${API}/${produto.id}`, {
+        method: 'DELETE',
+        headers: cabecalhos()
+      });
+
+      if (!resposta.ok) {
+        alert('Não foi possível remover este produto.');
+        return;
+      }
+
+      await carregarProdutos();
+    }
+
+    function adicionarCategoria() {
+      const categoria = form.novaCategoria.value.trim();
+      if (!categoria) return;
+      const normalizada = categoria.toLowerCase();
+      if (!estado.categorias.includes(normalizada)) {
+        estado.categorias.push(normalizada);
+        preencherCategorias();
+        renderTagsCategorias();
+      }
+      form.categoria.value = normalizada;
+      form.novaCategoria.value = '';
+    }
+
+    async function exportarJSON() {
+      const blob = new Blob([JSON.stringify(estado.produtos, null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'produtos.json';
+      link.click();
+    }
+
+    document.getElementById('btn-salvar').addEventListener('click', salvarProduto);
+    document.getElementById('btn-limpar').addEventListener('click', limparFormulario);
+    document.getElementById('btn-add-categoria').addEventListener('click', adicionarCategoria);
+    document.getElementById('btn-exportar').addEventListener('click', exportarJSON);
+    form.novaCategoria.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Enter') adicionarCategoria();
+    });
+
+    limparFormulario();
+    carregarProdutos();
+  </script>
 </body>
 </html>

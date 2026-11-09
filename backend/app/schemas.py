@@ -9,6 +9,8 @@ class ProdutoEntrada(BaseModel):
     description: str = ""
     category: str | None = None
     categoria: str | None = None
+    preco_antigo: str | None = None
+    desconto: str | None = None
 
 
 class ProdutoSaida(BaseModel):
@@ -20,6 +22,8 @@ class ProdutoSaida(BaseModel):
     description: str
     category: str
     categoria: str
+    preco_antigo: str = ""
+    desconto: str = ""
 
 
 class CadastroEntrada(BaseModel):
