@@ -10,8 +10,11 @@ class Usuario(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     nome: Mapped[str] = mapped_column(String(120))
     email: Mapped[str] = mapped_column(String(180), unique=True, index=True)
-    senha_hash: Mapped[str] = mapped_column(String(200))
+    senha_hash: Mapped[str | None] = mapped_column(String(200), nullable=True)
     token: Mapped[str | None] = mapped_column(String(80), nullable=True, index=True)
+    provedor: Mapped[str] = mapped_column(String(20), default="local", index=True)
+    google_id: Mapped[str | None] = mapped_column(String(120), nullable=True, unique=True, index=True)
+    imagem_url: Mapped[str | None] = mapped_column(String(400), nullable=True)
 
 
 class Produto(Base):

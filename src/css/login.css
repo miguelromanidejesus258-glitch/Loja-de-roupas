@@ -108,6 +108,47 @@ body {
     font-size: 14px;
 }
 
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 12px;
+    color: var(--cor-texto-claro);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.google-button {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #ffffff;
+    color: #1d1d1d;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.google-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.google-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
 /* Link de Cadastro */
 .signup-link {
     margin-top: 25px;

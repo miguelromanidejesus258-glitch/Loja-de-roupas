@@ -33,6 +33,10 @@ class LoginEntrada(BaseModel):
     senha: str
 
 
+class GoogleLoginEntrada(BaseModel):
+    credential: str
+
+
 class UsuarioSaida(BaseModel):
     id: int
     nome: str

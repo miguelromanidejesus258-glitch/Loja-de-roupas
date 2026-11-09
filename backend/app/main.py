@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -5,12 +6,22 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from dotenv import load_dotenv
+from sqlalchemy import text
 from sqlalchemy.orm import Session
+
+try:
+    from google.auth.transport import requests as google_requests
+    from google.oauth2 import id_token
+except Exception:  # pragma: no cover
+    google_requests = None
+    id_token = None
 
 from .database import Base, engine, get_db
 from .models import ItemCarrinho, Produto, Usuario
 from .schemas import (
     CadastroEntrada,
+    GoogleLoginEntrada,
     ItemCarrinhoEntrada,
     ItemCarrinhoSaida,
     LoginEntrada,
@@ -23,12 +34,43 @@ from .seguranca import conferir_senha, gerar_hash, usuario_logado
 import secrets
 
 RAIZ = Path(__file__).resolve().parents[2]
+load_dotenv(RAIZ / "backend" / ".env")
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "").strip()
+
+
+def garantir_colunas_usuarios(db: Session) -> None:
+    try:
+        colunas = db.execute(text("PRAGMA table_info(usuarios)")).fetchall()
+    except Exception:
+        return
+
+    nomes = {coluna[1] for coluna in colunas}
+    alteracoes = {
+        "senha_hash": "ALTER TABLE usuarios ADD COLUMN senha_hash VARCHAR(200)",
+        "provedor": "ALTER TABLE usuarios ADD COLUMN provedor VARCHAR(20) DEFAULT 'local'",
+        "google_id": "ALTER TABLE usuarios ADD COLUMN google_id VARCHAR(120)",
+        "imagem_url": "ALTER TABLE usuarios ADD COLUMN imagem_url VARCHAR(400)",
+    }
+
+    for nome, comando in alteracoes.items():
+        if nome not in nomes:
+            db.execute(text(comando))
+
+    db.execute(
+        text("UPDATE usuarios SET senha_hash = :valor WHERE senha_hash IS NULL"),
+        {"valor": gerar_hash(secrets.token_urlsafe(24))},
+    )
+    db.execute(
+        text("UPDATE usuarios SET provedor = 'local' WHERE provedor IS NULL OR provedor = ''"),
+    )
+    db.commit()
 
 
 @asynccontextmanager
 async def vida_da_api(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     with Session(engine) as db:
+        garantir_colunas_usuarios(db)
         popular_banco(db)
     yield
 
@@ -123,6 +165,51 @@ def apagar_produto(
     return {"ok": True}
 
 
+@app.get("/api/auth/google/client-id")
+def google_client_id():
+    return {"client_id": GOOGLE_CLIENT_ID}
+
+
+@app.post("/api/auth/google", response_model=UsuarioSaida)
+def login_google(dados: GoogleLoginEntrada, db: Session = Depends(get_db)):
+    if not GOOGLE_CLIENT_ID:
+        raise HTTPException(status_code=503, detail="Google client ID não configurado. Configure a variável GOOGLE_CLIENT_ID.")
+    if not id_token or not google_requests:
+        raise HTTPException(status_code=503, detail="Biblioteca de autenticação do Google indisponível.")
+
+    try:
+        info = id_token.verify_oauth2_token(dados.credential, google_requests.Request(), GOOGLE_CLIENT_ID)
+    except Exception as erro:
+        raise HTTPException(status_code=401, detail="Credencial do Google inválida") from erro
+
+    email = (info.get("email") or "").lower().strip()
+    if not email:
+        raise HTTPException(status_code=400, detail="E-mail do Google não disponível")
+
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    if not usuario:
+        usuario = Usuario(
+            nome=(info.get("name") or info.get("given_name") or "Usuário Google").strip()[:120],
+            email=email,
+            senha_hash=gerar_hash(secrets.token_urlsafe(24)),
+            provedor="google",
+            google_id=str(info.get("sub") or ""),
+            imagem_url=info.get("picture") or "",
+            token=secrets.token_urlsafe(32),
+        )
+        db.add(usuario)
+    else:
+        usuario.nome = (usuario.nome or info.get("name") or "Usuário").strip()[:120]
+        usuario.provedor = "google"
+        usuario.google_id = usuario.google_id or str(info.get("sub") or "")
+        usuario.imagem_url = usuario.imagem_url or (info.get("picture") or "")
+
+    usuario.token = secrets.token_urlsafe(32)
+    db.commit()
+    db.refresh(usuario)
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=usuario.token)
+
+
 @app.post("/api/auth/registrar", response_model=UsuarioSaida)
 def registrar(dados: CadastroEntrada, db: Session = Depends(get_db)):
     email = dados.email.lower().strip()
@@ -133,6 +220,7 @@ def registrar(dados: CadastroEntrada, db: Session = Depends(get_db)):
         email=email,
         senha_hash=gerar_hash(dados.senha),
         token=secrets.token_urlsafe(32),
+        provedor="local",
     )
     db.add(usuario)
     db.commit()
