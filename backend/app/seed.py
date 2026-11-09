@@ -30,11 +30,18 @@ def popular_banco(db: Session) -> None:
                 category=categoria_de(item),
             ))
 
-    if not db.query(Usuario).filter(Usuario.email == EMAIL_ADMIN).first():
-        db.add(Usuario(
+    admin = db.query(Usuario).filter(Usuario.email == EMAIL_ADMIN).first()
+    if not admin:
+        admin = Usuario(
             nome="Admin RMX",
             email=EMAIL_ADMIN,
             senha_hash=gerar_hash(SENHA_ADMIN),
-        ))
+            role="admin",
+            ativo=True,
+        )
+        db.add(admin)
+    else:
+        admin.role = "admin"
+        admin.ativo = True
 
     db.commit()

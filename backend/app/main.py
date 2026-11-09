@@ -30,8 +30,14 @@ from .schemas import (
     UsuarioSaida,
 )
 from .seed import popular_banco
-from .seguranca import conferir_senha, gerar_hash, usuario_logado
-import secrets
+from .seguranca import (
+    conferir_senha,
+    criar_sessao_para_usuario,
+    gerar_hash,
+    gerar_token_seguro,
+    usuario_admin,
+    usuario_logado,
+)
 
 RAIZ = Path(__file__).resolve().parents[2]
 load_dotenv(RAIZ / "backend" / ".env")
@@ -48,6 +54,9 @@ def garantir_colunas_usuarios(db: Session) -> None:
     alteracoes = {
         "senha_hash": "ALTER TABLE usuarios ADD COLUMN senha_hash VARCHAR(200)",
         "provedor": "ALTER TABLE usuarios ADD COLUMN provedor VARCHAR(20) DEFAULT 'local'",
+        "role": "ALTER TABLE usuarios ADD COLUMN role VARCHAR(20) DEFAULT 'user'",
+        "ativo": "ALTER TABLE usuarios ADD COLUMN ativo BOOLEAN DEFAULT 1",
+        "ultima_atividade": "ALTER TABLE usuarios ADD COLUMN ultima_atividade DATETIME",
         "google_id": "ALTER TABLE usuarios ADD COLUMN google_id VARCHAR(120)",
         "imagem_url": "ALTER TABLE usuarios ADD COLUMN imagem_url VARCHAR(400)",
     }
@@ -58,11 +67,32 @@ def garantir_colunas_usuarios(db: Session) -> None:
 
     db.execute(
         text("UPDATE usuarios SET senha_hash = :valor WHERE senha_hash IS NULL"),
-        {"valor": gerar_hash(secrets.token_urlsafe(24))},
+        {"valor": gerar_hash("reset-password")},
     )
     db.execute(
         text("UPDATE usuarios SET provedor = 'local' WHERE provedor IS NULL OR provedor = ''"),
     )
+    db.execute(
+        text("UPDATE usuarios SET role = 'user' WHERE role IS NULL OR role = ''"),
+    )
+    db.execute(
+        text("UPDATE usuarios SET ativo = 1 WHERE ativo IS NULL"),
+    )
+    db.commit()
+
+
+def garantir_tabela_sessoes(db: Session) -> None:
+    db.execute(text("""
+        CREATE TABLE IF NOT EXISTS sessoes_usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario_id INTEGER NOT NULL,
+            token VARCHAR(120) NOT NULL UNIQUE,
+            criado_em DATETIME NOT NULL,
+            expira_em DATETIME NOT NULL,
+            revogado BOOLEAN NOT NULL DEFAULT 0,
+            FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+        )
+    """))
     db.commit()
 
 
@@ -90,18 +120,40 @@ async def vida_da_api(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     with Session(engine) as db:
         garantir_colunas_usuarios(db)
+        garantir_tabela_sessoes(db)
         garantir_colunas_produtos(db)
         popular_banco(db)
     yield
 
 
+origens_permitidas = {
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+}
+origens_ambiente = os.getenv("CORS_ALLOWED_ORIGINS", "").strip()
+if origens_ambiente:
+    origens_permitidas.update(origem.strip() for origem in origens_ambiente.split(",") if origem.strip())
+
 app = FastAPI(title="RMX Store API", version="1.0.0", lifespan=vida_da_api)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=list(origens_permitidas),
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def headers_de_segurança(request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
+    return response
 
 
 def produto_publico(produto: Produto) -> ProdutoSaida:
@@ -149,7 +201,7 @@ def obter_produto(produto_id: int, db: Session = Depends(get_db)):
 def criar_produto(
     dados: ProdutoEntrada,
     db: Session = Depends(get_db),
-    _: Usuario = Depends(usuario_logado),
+    _: Usuario = Depends(usuario_admin),
 ):
     produto = Produto()
     aplicar_produto(produto, dados)
@@ -164,7 +216,7 @@ def editar_produto(
     produto_id: int,
     dados: ProdutoEntrada,
     db: Session = Depends(get_db),
-    _: Usuario = Depends(usuario_logado),
+    _: Usuario = Depends(usuario_admin),
 ):
     produto = db.get(Produto, produto_id)
     if not produto:
@@ -179,7 +231,7 @@ def editar_produto(
 def apagar_produto(
     produto_id: int,
     db: Session = Depends(get_db),
-    _: Usuario = Depends(usuario_logado),
+    _: Usuario = Depends(usuario_admin),
 ):
     produto = db.get(Produto, produto_id)
     if not produto:
@@ -213,26 +265,30 @@ def login_google(dados: GoogleLoginEntrada, db: Session = Depends(get_db)):
 
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
     if not usuario:
+if not usuario:
         usuario = Usuario(
             nome=(info.get("name") or info.get("given_name") or "Usuário Google").strip()[:120],
             email=email,
             senha_hash=gerar_hash(secrets.token_urlsafe(24)),
             provedor="google",
+            role="admin" if email == "admin@rmx.store" else "user",
             google_id=str(info.get("sub") or ""),
             imagem_url=info.get("picture") or "",
-            token=secrets.token_urlsafe(32),
         )
         db.add(usuario)
+        db.commit()
+        db.refresh(usuario)
     else:
         usuario.nome = (usuario.nome or info.get("name") or "Usuário").strip()[:120]
         usuario.provedor = "google"
+        usuario.role = "admin" if email == "admin@rmx.store" else (usuario.role or "user")
         usuario.google_id = usuario.google_id or str(info.get("sub") or "")
         usuario.imagem_url = usuario.imagem_url or (info.get("picture") or "")
+        db.commit()
 
-    usuario.token = secrets.token_urlsafe(32)
-    db.commit()
+    token = criar_sessao_para_usuario(db, usuario)
     db.refresh(usuario)
-    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=usuario.token)
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token)
 
 
 @app.post("/api/auth/registrar", response_model=UsuarioSaida)
@@ -244,13 +300,15 @@ def registrar(dados: CadastroEntrada, db: Session = Depends(get_db)):
         nome=dados.nome.strip(),
         email=email,
         senha_hash=gerar_hash(dados.senha),
-        token=secrets.token_urlsafe(32),
         provedor="local",
+        role="admin" if email == "admin@rmx.store" else "user",
     )
     db.add(usuario)
     db.commit()
     db.refresh(usuario)
-    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=usuario.token)
+    token = criar_sessao_para_usuario(db, usuario)
+    db.refresh(usuario)
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token)
 
 
 @app.post("/api/auth/login", response_model=UsuarioSaida)
@@ -259,9 +317,12 @@ def login(dados: LoginEntrada, db: Session = Depends(get_db)):
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
     if not usuario or not conferir_senha(dados.senha, usuario.senha_hash):
         raise HTTPException(status_code=401, detail="E-mail ou senha incorretos")
-    usuario.token = secrets.token_urlsafe(32)
-    db.commit()
-    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=usuario.token)
+    if not usuario.ativo:
+        raise HTTPException(status_code=403, detail="Usuário bloqueado")
+    usuario.role = "admin" if email == "admin@rmx.store" else (usuario.role or "user")
+    token = criar_sessao_para_usuario(db, usuario)
+    db.refresh(usuario)
+    return UsuarioSaida(id=usuario.id, nome=usuario.nome, email=usuario.email, token=token)
 
 
 @app.get("/api/auth/me", response_model=UsuarioSaida)
