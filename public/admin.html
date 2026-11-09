@@ -1,143 +1,396 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <title>ADM - RMX Store</title>
-    <link rel="stylesheet" href="../src/css/admin.css">
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Painel ADM | RMX Store</title>
+ <link rel="stylesheet" href="../src/css/admin.css">
 </head>
 <body>
+ <div class="admin-shell">
+   <header class="topbar">
+     <div>
+       <span class="eyebrow">Dashboard</span>
+       <h1>Painel de gerenciamento</h1>
+     </div>
+     <div class="topbar-actions">
+       <a class="ghost-btn" href="loja.html">Ver loja</a>
+       <button class="ghost-btn danger" id="logoutBtn" type="button">Sair</button>
+     </div>
+   </header>
 
-<h1>PAINEL ADM - RMX STORE</h1>
+   <main class="admin-layout">
+     <section class="panel panel-form">
+       <div class="panel-header">
+         <h2>Adicionar / editar card</h2>
+       </div>
 
-<div class="form-add">
-    <h3>Adicionar / Editar Produto</h3>
-    <input id="edit-id" type="hidden">
-    <input id="f-name" placeholder="Nome">
-    <input id="f-price" placeholder="Preço ex: 90,99R$">
-    <input id="f-image" placeholder="Caminho da imagem">
-    <input id="f-link" placeholder="Link de venda">
-    <textarea id="f-desc" placeholder="Descrição"></textarea>
-    <button class="btn-add" onclick="salvarProduto()">Salvar Produto</button>
-    <button onclick="limparForm()">Cancelar</button>
-    <button onclick="exportarJSON()" style="background:yellow; color:black">⬇️ Baixar produtos.json</button>
-</div>
+       <div class="field-grid">
+         <input id="edit-id" type="hidden">
 
-<div class="grid" id="lista"></div>
+         <label>
+           <span>Nome</span>
+           <input id="f-name" type="text" placeholder="Ex.: Camisa RMX Store">
+         </label>
 
-<script>
-let produtos = [];
-const API = '/api/produtos';
+         <label>
+           <span>Categoria</span>
+           <input id="f-category" type="text" placeholder="Ex.: Camisas">
+         </label>
 
-function tokenAdmin() {
-  return localStorage.getItem('rmx_token') || '';
-}
+         <label>
+           <span>Preço</span>
+           <input id="f-price" type="text" placeholder="Ex.: 89,90R$">
+         </label>
 
-function cabecalhos() {
-  const headers = { 'Content-Type': 'application/json' };
-  const token = tokenAdmin();
-  if (token) headers.Authorization = 'Bearer ' + token;
-  return headers;
-}
+         <label>
+           <span>Preço antigo</span>
+           <input id="f-old-price" type="text" placeholder="Ex.: 119,90R$">
+         </label>
 
-async function carregar() {
-  try {
-    const r = await fetch(API);
-    if (!r.ok) throw new Error();
-    produtos = await r.json();
-  } catch {
-    try {
-      produtos = await fetch('produtos.json').then(r => r.json());
-    } catch {
-      produtos = [];
-    }
-  }
-  render();
-}
-carregar();
+         <label>
+           <span>Preço da oferta</span>
+           <input id="f-offer-price" type="text" placeholder="Ex.: 69,90R$">
+         </label>
 
-function render(){
- const lista=document.getElementById('lista');
- lista.innerHTML='';
- produtos.forEach((p,i)=>{
-  lista.innerHTML+=`
-  <div class="card-admin">
-   <img src="${p.image}">
-   <h4>${p.name}</h4>
-   <p>${p.price}</p>
-   <p style="font-size:12px; opacity:0.7">${p.description?.substring(0,80)}</p>
-   <button class="btn-save" onclick="editar(${i})">Editar</button>
-   <button class="btn-del" onclick="remover(${i})">Apagar</button>
-  </div>`;
- });
-}
+         <label>
+           <span>Imagem</span>
+           <input id="f-image" type="text" placeholder="Caminho da imagem ou URL">
+         </label>
 
-function editar(i){
- const p=produtos[i];
- document.getElementById('edit-id').value=i;
- document.getElementById('f-name').value=p.name;
- document.getElementById('f-price').value=p.price;
- document.getElementById('f-image').value=p.image;
- document.getElementById('f-link').value=p.link;
- document.getElementById('f-desc').value=p.description;
- window.scrollTo(0,0);
-}
+         <label>
+           <span>Link</span>
+           <input id="f-link" type="text" placeholder="descricao.html">
+         </label>
 
-async function salvarProduto(){
- const id=document.getElementById('edit-id').value;
- const novo={
-  name: document.getElementById('f-name').value,
-  price: document.getElementById('f-price').value,
-  image: document.getElementById('f-image').value,
-  link: document.getElementById('f-link').value,
-  description: document.getElementById('f-desc').value,
-  categoria: id!=="" ? (produtos[id].category || produtos[id].categoria || "mais-vendidos") : "mais-vendidos"
- };
- if (!tokenAdmin()) {
-  alert("Entre na loja com admin@rmx.store para salvar no servidor.");
-  return;
- }
- const url = id!=="" ? API + "/" + produtos[id].id : API;
- const method = id!=="" ? "PUT" : "POST";
- const r = await fetch(url, { method, headers: cabecalhos(), body: JSON.stringify(novo) });
- if (!r.ok) {
-  alert("Não salvou no servidor.");
-  return;
- }
- limparForm();
- await carregar();
-}
+         <label class="full-width">
+           <span>Descrição</span>
+           <textarea id="f-desc" placeholder="Descreva o produto, material, vantagens e detalhes..."></textarea>
+         </label>
+       </div>
 
-async function remover(i){
- if(!confirm("Apagar?")) return;
- if (!tokenAdmin()) {
-  alert("Entre na loja para apagar no servidor.");
-  return;
- }
- const r = await fetch(API + "/" + produtos[i].id, { method: "DELETE", headers: cabecalhos() });
- if (!r.ok) {
-  alert("Não apagou no servidor.");
-  return;
- }
- await carregar();
-}
+       <div class="toggle-row">
+         <label class="switch">
+           <input id="f-is-offer" type="checkbox">
+           <span>Em oferta</span>
+         </label>
+       </div>
 
-function limparForm(){
- document.getElementById('edit-id').value="";
- document.getElementById('f-name').value="";
- document.getElementById('f-price').value="";
- document.getElementById('f-image').value="";
- document.getElementById('f-link').value="";
- document.getElementById('f-desc').value="";
-}
+       <div class="form-actions">
+         <button class="btn btn-primary" type="button" onclick="salvarProduto()">Salvar card</button>
+         <button class="btn btn-secondary" type="button" onclick="limparForm()">Limpar</button>
+         <button class="btn btn-warning" type="button" onclick="exportarJSON()">Exportar JSON</button>
+       </div>
 
-function exportarJSON(){
- const blob=new Blob([JSON.stringify(produtos, null, 2)], {type:'application/json'});
- const a=document.createElement('a');
- a.href=URL.createObjectURL(blob);
- a.download='produtos.json';
- a.click();
-}
-</script>
+       <p id="admin-msg" class="admin-message" aria-live="polite"></p>
+     </section>
 
+     <section class="panel panel-list">
+       <div class="panel-header list-header">
+         <h2>Cards cadastrados</h2>
+         <span id="product-counter" class="stat-pill">0 cards</span>
+       </div>
+
+       <div class="toolbar-filter">
+         <input id="filtro" type="search" placeholder="Buscar por nome ou categoria...">
+         <select id="filtro-categoria">
+           <option value="todas">Todas as categorias</option>
+         </select>
+       </div>
+
+       <div id="lista" class="grid cards-grid"></div>
+     </section>
+   </main>
+ </div>
+
+ <script>
+   const API = '/api/produtos';
+   let produtos = [];
+
+   function mostrarMensagem(texto, tipo = 'info') {
+     const msg = document.getElementById('admin-msg');
+     if (!msg) return;
+     msg.textContent = texto;
+     msg.className = `admin-message ${tipo}`;
+   }
+
+   function tokenAdmin() {
+     return localStorage.getItem('rmx_token') || '';
+   }
+
+   function cabecalhos() {
+     const headers = { 'Content-Type': 'application/json' };
+     const token = tokenAdmin();
+     if (token) headers.Authorization = 'Bearer ' + token;
+     return headers;
+   }
+
+   function normalizarProduto(produto = {}) {
+     const categoria = produto.category ?? produto.categoria ?? 'mais-vendidos';
+     return {
+       id: produto.id ?? null,
+       name: produto.name ?? produto.nome ?? '',
+       price: produto.price ?? produto.preco ?? '0,00',
+       old_price: produto.old_price ?? produto.preco_antigo ?? '',
+       offer_price: produto.offer_price ?? produto.preco_oferta ?? '',
+       is_offer: Boolean(produto.is_offer ?? produto.oferta ?? false),
+       image: produto.image ?? produto.imagem ?? '',
+       link: produto.link ?? 'descricao.html',
+       description: produto.description ?? produto.descricao ?? '',
+       category: categoria,
+       categoria,
+     };
+   }
+
+   function escapeHTML(valor = '') {
+     return String(valor)
+       .replace(/&/g, '&amp;')
+       .replace(/</g, '&lt;')
+       .replace(/>/g, '&gt;')
+       .replace(/\"/g, '&quot;')
+       .replace(/'/g, '&#39;');
+   }
+
+   function truncar(texto, limite = 110) {
+     const valor = String(texto || '').trim();
+     if (!valor) return 'Sem descrição';
+     return valor.length > limite ? `${valor.slice(0, limite).trim()}...` : valor;
+   }
+
+   function atualizarCategorias() {
+     const select = document.getElementById('filtro-categoria');
+     if (!select) return;
+     const categorias = [...new Set(produtos.map(p => normalizarProduto(p).category).filter(Boolean))].sort();
+     const atual = select.value || 'todas';
+     select.innerHTML = '<option value="todas">Todas as categorias</option>' + categorias.map(c => `<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join('');
+     if (categorias.includes(atual)) {
+       select.value = atual;
+     } else {
+       select.value = 'todas';
+     }
+   }
+
+   function getFiltro() {
+     const input = document.getElementById('filtro');
+     const select = document.getElementById('filtro-categoria');
+     return {
+       termo: (input?.value || '').trim().toLowerCase(),
+       categoria: (select?.value || 'todas'),
+     };
+   }
+
+   function render() {
+     const lista = document.getElementById('lista');
+     const counter = document.getElementById('product-counter');
+     if (!lista) return;
+
+     const { termo, categoria } = getFiltro();
+     const filtrados = produtos
+       .map(normalizarProduto)
+       .filter(produto => {
+         const categoriaOk = categoria === 'todas' || produto.category === categoria;
+         const buscaOk = !termo || `${produto.name} ${produto.category}`.toLowerCase().includes(termo);
+         return categoriaOk && buscaOk;
+       });
+
+     counter.textContent = `${filtrados.length} card${filtrados.length === 1 ? '' : 's'}`;
+     if (filtrados.length === 0) {
+       lista.innerHTML = '<div class="empty-state">Nenhum card encontrado.</div>';
+       return;
+     }
+
+     lista.innerHTML = filtrados.map((p) => {
+       const produto = normalizarProduto(p);
+       const precoAtual = produto.is_offer && produto.offer_price ? produto.offer_price : produto.price;
+       const precoAntigo = produto.is_offer ? (produto.old_price || produto.price) : '';
+       const image = produto.image || 'https://via.placeholder.com/600x600?text=Imagem';
+       const originalIndex = produtos.findIndex(item => Number(normalizarProduto(item).id) === Number(produto.id));
+       return `
+         <article class="card-admin">
+           <div class="thumb-wrap">
+             <img src="${image}" alt="${escapeHTML(produto.name)}" loading="lazy">
+             ${produto.is_offer ? '<span class="offer-badge">Oferta</span>' : ''}
+           </div>
+           <div class="card-body">
+             <h4>${escapeHTML(produto.name)}</h4>
+             <div class="price-row">
+               <strong>${escapeHTML(precoAtual)}</strong>
+               ${precoAntigo && precoAntigo !== precoAtual ? `<span class="old-price">${escapeHTML(precoAntigo)}</span>` : ''}
+             </div>
+             <p class="category-tag">${escapeHTML(produto.category || 'Sem categoria')}</p>
+             <p class="description">${escapeHTML(truncar(produto.description, 110))}</p>
+           </div>
+           <div class="card-actions">
+             <button class="btn btn-primary small" type="button" onclick="editar(${originalIndex})">Editar</button>
+             <button class="btn btn-danger small" type="button" onclick="remover(${originalIndex})">Apagar</button>
+           </div>
+         </article>
+       `;
+     }).join('');
+   }
+
+   async function carregar() {
+     try {
+       const r = await fetch(API, { headers: cabecalhos() });
+       if (!r.ok) throw new Error();
+       const dados = await r.json();
+       produtos = Array.isArray(dados) ? dados.map(normalizarProduto) : [];
+     } catch (erro) {
+       try {
+         const local = await fetch('produtos.json');
+         const dados = await local.json();
+         produtos = Array.isArray(dados) ? dados.map(normalizarProduto) : [];
+       } catch {
+         produtos = [];
+       }
+     }
+     atualizarCategorias();
+     render();
+   }
+
+   function editar(index) {
+     const p = produtos[index];
+     if (!p) return;
+     const produto = normalizarProduto(p);
+     document.getElementById('edit-id').value = String(index);
+     document.getElementById('f-name').value = produto.name;
+     document.getElementById('f-category').value = produto.category || 'mais-vendidos';
+     document.getElementById('f-price').value = produto.price || '';
+     document.getElementById('f-old-price').value = produto.old_price || '';
+     document.getElementById('f-offer-price').value = produto.offer_price || '';
+     document.getElementById('f-image').value = produto.image || '';
+     document.getElementById('f-link').value = produto.link || 'descricao.html';
+     document.getElementById('f-desc').value = produto.description || '';
+     document.getElementById('f-is-offer').checked = Boolean(produto.is_offer);
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+     mostrarMensagem('Produto carregado no formulário para edição.', 'info');
+   }
+
+   function limparForm() {
+     document.getElementById('edit-id').value = '';
+     document.getElementById('f-name').value = '';
+     document.getElementById('f-category').value = 'mais-vendidos';
+     document.getElementById('f-price').value = '';
+     document.getElementById('f-old-price').value = '';
+     document.getElementById('f-offer-price').value = '';
+     document.getElementById('f-image').value = '';
+     document.getElementById('f-link').value = 'descricao.html';
+     document.getElementById('f-desc').value = '';
+     document.getElementById('f-is-offer').checked = false;
+     mostrarMensagem('Formulário limpo.', 'success');
+   }
+
+   async function salvarProduto() {
+     const nome = document.getElementById('f-name').value.trim();
+     const categoria = document.getElementById('f-category').value.trim() || 'mais-vendidos';
+     const price = document.getElementById('f-price').value.trim();
+     const oldPrice = document.getElementById('f-old-price').value.trim();
+     const offerPrice = document.getElementById('f-offer-price').value.trim();
+     const image = document.getElementById('f-image').value.trim();
+     const link = document.getElementById('f-link').value.trim() || 'descricao.html';
+     const descricao = document.getElementById('f-desc').value.trim();
+     const isOffer = document.getElementById('f-is-offer').checked;
+     const editId = document.getElementById('edit-id').value;
+
+     if (!nome || !price) {
+       mostrarMensagem('Preencha pelo menos o nome e o preço do card.', 'error');
+       return;
+     }
+
+     if (!tokenAdmin()) {
+       mostrarMensagem('Faça login com admin@rmx.store para salvar os cards.', 'error');
+       window.location.href = 'login.html';
+       return;
+     }
+
+     const novo = {
+       name: nome,
+       price,
+       old_price: oldPrice,
+       offer_price: offerPrice,
+       is_offer: isOffer,
+       image,
+       link,
+       description: descricao,
+       category: categoria,
+       categoria,
+     };
+
+     const produtoAtual = editId !== '' ? produtos[Number(editId)] : null;
+     const url = produtoAtual ? `${API}/${produtoAtual.id}` : API;
+     const method = produtoAtual ? 'PUT' : 'POST';
+
+     try {
+       const r = await fetch(url, {
+         method,
+         headers: cabecalhos(),
+         body: JSON.stringify(novo)
+       });
+
+       const dados = await r.json().catch(() => ({}));
+       if (!r.ok) {
+         throw new Error(dados.detail || 'Não foi possível salvar o card.');
+       }
+
+       mostrarMensagem('Card salvo com sucesso!', 'success');
+       limparForm();
+       await carregar();
+     } catch (erro) {
+       mostrarMensagem(erro.message || 'Erro ao salvar o card.', 'error');
+     }
+   }
+
+   async function remover(index) {
+     const produto = produtos[index];
+     if (!produto) return;
+     const confirmado = confirm(`Apagar o card "${produto.name}"?`);
+     if (!confirmado) return;
+
+     if (!tokenAdmin()) {
+       mostrarMensagem('Faça login para apagar itens.', 'error');
+       window.location.href = 'login.html';
+       return;
+     }
+
+     try {
+       const r = await fetch(`${API}/${produto.id}`, {
+         method: 'DELETE',
+         headers: cabecalhos(),
+       });
+
+       if (!r.ok) {
+         const dados = await r.json().catch(() => ({}));
+         throw new Error(dados.detail || 'Não foi possível apagar o card.');
+       }
+
+       mostrarMensagem('Card removido com sucesso.', 'success');
+       await carregar();
+     } catch (erro) {
+       mostrarMensagem(erro.message || 'Erro ao remover o card.', 'error');
+     }
+   }
+
+   function exportarJSON() {
+     const payload = JSON.stringify(produtos.map(normalizarProduto), null, 2);
+     const blob = new Blob([payload], { type: 'application/json' });
+     const link = document.createElement('a');
+     link.href = URL.createObjectURL(blob);
+     link.download = 'produtos.json';
+     link.click();
+     URL.revokeObjectURL(link.href);
+     mostrarMensagem('Arquivo produtos.json exportado.', 'success');
+   }
+
+   document.getElementById('logoutBtn')?.addEventListener('click', () => {
+     localStorage.removeItem('rmx_token');
+     localStorage.removeItem('rmx_usuario');
+     window.location.href = 'login.html';
+   });
+
+   document.getElementById('filtro')?.addEventListener('input', render);
+   document.getElementById('filtro-categoria')?.addEventListener('change', render);
+
+   carregar();
+ </script>
 </body>
 </html>

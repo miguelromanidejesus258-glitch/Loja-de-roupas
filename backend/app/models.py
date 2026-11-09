@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Integer, String, UniqueConstraint
+from sqlalchemy import Boolean, ForeignKey, Integer, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
@@ -20,6 +20,9 @@ class Produto(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(180))
     price: Mapped[str] = mapped_column(String(40))
+    old_price: Mapped[str] = mapped_column(String(40), default="")
+    offer_price: Mapped[str] = mapped_column(String(40), default="")
+    is_offer: Mapped[bool] = mapped_column(Boolean, default=False)
     image: Mapped[str] = mapped_column(String(400), default="")
     link: Mapped[str] = mapped_column(String(200), default="descricao.html")
     description: Mapped[str] = mapped_column(String(2000), default="")

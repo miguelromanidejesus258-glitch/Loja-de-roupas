@@ -87,7 +87,10 @@ function salvarProdutos(produtos) {
 function criarHTMLCard(p) {
   const imagem = corrigirCaminhoImagem(p.imagem || p.image);
   const nome = p.nome || p.name || 'Produto sem nome';
-  const preco = p.preco || p.price || '0,00';
+  const isOffer = Boolean(p.is_offer ?? p.oferta ?? false);
+  const precoOferta = p.offer_price || p.preco_oferta || '';
+  const preco = isOffer && precoOferta ? precoOferta : (p.preco || p.price || '0,00');
+  const precoAntigo = isOffer ? (p.old_price || p.preco_antigo || '') : '';
 
   const src = imagem ? `src="${imagem}"` : '';
   return `
@@ -96,9 +99,10 @@ function criarHTMLCard(p) {
       alt="${nome}"
       loading="lazy"
     >
+    ${isOffer ? '<span class="badge-oferta">Oferta</span>' : ''}
     <h4>${nome}</h4>
     <div class="informations-card">
-        <p class="preco-card">${preco}</p>
+        <p class="preco-card">${preco}${precoAntigo && precoAntigo !== preco ? ` <span class="preco-antigo">${precoAntigo}</span>` : ''}</p>
         <div class="interact">
             <button class="cart"><ion-icon name="cart-outline"></ion-icon></button>
             <button class="heart"><ion-icon name="heart-outline"></ion-icon></button>
@@ -145,6 +149,9 @@ function renderizarComJSON(produtos) {
       if (prod.id != null) article.dataset.id = prod.id;
       article.dataset.name = prod.nome || prod.name;
       article.dataset.price = prod.preco || prod.price;
+      article.dataset.oldPrice = prod.old_price || prod.preco_antigo || '';
+      article.dataset.offerPrice = prod.offer_price || prod.preco_oferta || '';
+      article.dataset.isOffer = String(Boolean(prod.is_offer ?? prod.oferta ?? false));
       article.dataset.image = imagem;
       article.dataset.link = 'descricao.html';
       article.dataset.desc = prod.descricao || prod.desc || prod.nome || '';
@@ -195,6 +202,9 @@ function ativarBotoes() {
       const produto = {
         name: card.dataset.name,
         price: card.dataset.price,
+        oldPrice: card.dataset.oldPrice || '',
+        offerPrice: card.dataset.offerPrice || '',
+        isOffer: card.dataset.isOffer === 'true',
         image: card.dataset.image,
         desc: card.dataset.desc || card.dataset.name
       };

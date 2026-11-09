@@ -4,6 +4,9 @@ from pydantic import BaseModel, EmailStr, Field
 class ProdutoEntrada(BaseModel):
     name: str = Field(min_length=1, max_length=180)
     price: str = Field(min_length=1, max_length=40)
+    old_price: str = ""
+    offer_price: str = ""
+    is_offer: bool = False
     image: str = ""
     link: str = "descricao.html"
     description: str = ""
@@ -15,6 +18,9 @@ class ProdutoSaida(BaseModel):
     id: int
     name: str
     price: str
+    old_price: str
+    offer_price: str
+    is_offer: bool
     image: str
     link: str
     description: str

@@ -47,6 +47,9 @@ def produto_publico(produto: Produto) -> ProdutoSaida:
         id=produto.id,
         name=produto.name,
         price=produto.price,
+        old_price=produto.old_price,
+        offer_price=produto.offer_price,
+        is_offer=produto.is_offer,
         image=produto.image,
         link=produto.link,
         description=produto.description,
@@ -58,6 +61,9 @@ def produto_publico(produto: Produto) -> ProdutoSaida:
 def aplicar_produto(produto: Produto, dados: ProdutoEntrada) -> None:
     produto.name = dados.name.strip()
     produto.price = dados.price.strip()
+    produto.old_price = (dados.old_price or "").strip()
+    produto.offer_price = (dados.offer_price or "").strip()
+    produto.is_offer = bool(dados.is_offer)
     produto.image = dados.image.strip()
     produto.link = (dados.link or "descricao.html").strip()
     produto.description = dados.description.strip()

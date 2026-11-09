@@ -337,6 +337,31 @@ main a:hover{
     color: var(--preco);
     font-weight: 600;
     font-size: 23px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.card .preco-antigo{
+    color: var(--branco-escuro);
+    text-decoration: line-through;
+    font-size: 15px;
+}
+
+.badge-oferta{
+    display: inline-block;
+    align-self: flex-start;
+    margin: 8px 0 0;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 199, 58, 0.18);
+    border: 1px solid rgba(255, 199, 58, 0.45);
+    color: #ffdf75;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .informations-card{
